@@ -1,6 +1,5 @@
 import express from 'express';
-// import { userRouter } from './routes/user.route.js';
-// import { chatRouter } from './routes/chat.route.js';
+import { userRouter } from './routes/user.route.js';
 
 export class Server {
     constructor(port) {
@@ -20,8 +19,7 @@ export class Server {
 
     setRoutes() {
         this.app.use(express.static('public'));
-    //     this.app.use('/api', userRouter);
-    //     this.app.use('/api/message', chatRouter);
+        this.app.use('/api', userRouter);
     }
 
     listen(port) {

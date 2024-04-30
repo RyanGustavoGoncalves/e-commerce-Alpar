@@ -1,0 +1,46 @@
+body {
+    padding: 20px;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+form {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.form-label {
+    font-weight: bold;
+}
+
+.form-control {
+    margin-bottom: 10px;
+}
+
+.btn-primary {
+    width: 100%;
+}
+
+a {
+    display: inline-block;
+    margin-top: 10px;
+    margin-right: 10px;
+    text-decoration: none;
+    color: #007bff;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.links-align{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.links-align a {
+    font-size: 14px;
+} 

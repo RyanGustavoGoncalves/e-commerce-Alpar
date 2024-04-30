@@ -5,6 +5,24 @@
 }
 .ul-content{
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    gap: 1rem;
+    list-style: none;
+    margin: 0;
+}
+.welcome-content{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.welcome-content img{
+    max-width: 32%;
+    width: 100%;
+}
+
+.text-container{
+    width: 80%;
 }

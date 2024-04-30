@@ -5,11 +5,12 @@ export class UserRepository {
         this.prisma = new PrismaClient();
     }
 
-    async registerUser({ username, password }) {
+    async registerUser({ username, email, password }) {
         try {
             return await this.prisma.user.create({
                 data: {
                     username,
+                    email,
                     password,
                 }
             });
@@ -17,5 +18,5 @@ export class UserRepository {
             console.error(error);
             throw error;
         }
-    }  
+    }
 }

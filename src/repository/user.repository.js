@@ -19,4 +19,34 @@ export class UserRepository {
             throw error;
         }
     }
+
+    async loginUser({ usernameOrEmail, password }) {
+        try {
+            return await this.prisma.user.findFirst({
+                where: {
+                    OR: [
+                        {
+                            username: usernameOrEmail,
+                            password
+                        },
+                        {
+                            email: usernameOrEmail,
+                            password
+                        }
+                    ]
+                }
+            });
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+    async getUsers() {
+        try {
+            return await this.prisma.user.findMany();
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
 }

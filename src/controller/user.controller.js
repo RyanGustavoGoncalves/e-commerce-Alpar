@@ -1,15 +1,42 @@
 import { UserRepository } from "../repository/user.repository.js";
+import { userService } from "../service/user.service.js";
 
 export class UserController {
     constructor() {
         this.repository = new UserRepository();
+        this.service = new userService();
     }
 
     registerUser = async (req, res) => {
         const user = req.body;
         try {
-            const newUser = await this.repository.registerUser(user);
-            return res.status(201).json(newUser);
+            if (await this.service.validarUser(user)) {
+                const newUser = await this.repository.registerUser(user);
+                return res.status(201).json(newUser);
+            } else {
+                return res.status(400).json({ error: "User already exists" });
+            }
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ error: "Internal server error" });
+        }
+    }
+
+    loginUser = async (req, res) => {
+        const user = req.body;
+        try {
+            const newUser = await this.repository.loginUser(user);
+            return res.status(200).json(newUser);
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ error: "Internal server error" });
+        }
+    }
+
+    getUser = async (req, res) => {
+        try {
+            const users = await this.repository.getUsers();
+            return res.status(200).json(users);
         } catch (error) {
             console.error(error);
             return res.status(500).json({ error: "Internal server error" });

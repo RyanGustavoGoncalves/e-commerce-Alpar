@@ -5,6 +5,15 @@ export class UserRepository {
         this.prisma = new PrismaClient();
     }
 
+    async getUsers() {
+        try {
+            return await this.prisma.user.findMany();
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+
     async registerUser({ username, email, password }) {
         try {
             return await this.prisma.user.create({
@@ -41,9 +50,15 @@ export class UserRepository {
             throw error;
         }
     }
-    async getUsers() {
+
+
+    async deleteUser(id) {
         try {
-            return await this.prisma.user.findMany();
+            return await this.prisma.user.delete({
+                where: {
+                    id
+                }
+            });
         } catch (error) {
             console.error(error);
             throw error;

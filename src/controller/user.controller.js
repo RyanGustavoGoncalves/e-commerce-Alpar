@@ -6,7 +6,16 @@ export class UserController {
         this.repository = new UserRepository();
         this.service = new userService();
     }
-
+    getUser = async (req, res) => {
+        try {
+            const users = await this.repository.getUsers();
+            return res.status(200).json(users);
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ error: "Internal server error" });
+        }
+    }
+    
     registerUser = async (req, res) => {
         const user = req.body;
         try {
@@ -33,10 +42,11 @@ export class UserController {
         }
     }
 
-    getUser = async (req, res) => {
+    deleteUser = async (req, res) => {
+        const id = parseInt(req.params.id);
         try {
-            const users = await this.repository.getUsers();
-            return res.status(200).json(users);
+            await this.repository.deleteUser(id);
+            return res.status(204).send();
         } catch (error) {
             console.error(error);
             return res.status(500).json({ error: "Internal server error" });

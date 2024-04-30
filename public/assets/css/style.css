@@ -3,3 +3,26 @@
     border-bottom: 1px solid #e3e6f0;
     padding: 0.5rem 1rem;
 }
+.ul-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    list-style: none;
+    margin: 0;
+}
+.welcome-content{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.welcome-content img{
+    max-width: 32%;
+    width: 100%;
+}
+
+.text-container{
+    width: 80%;
+}

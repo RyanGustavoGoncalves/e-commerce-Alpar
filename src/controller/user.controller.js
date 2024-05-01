@@ -36,8 +36,8 @@ export class UserController {
     loginUser = async (req, res) => {
         const user = req.body;
         try {
-            const newUser = await this.repository.loginUser(user);
-            return res.status(200).json(newUser);
+            const data = await this.repository.loginUser(user);
+            return res.status(200).json({ token: data.token, user: data.user, message: "User logged in" });
         } catch (error) {
             console.error(error);
             return res.status(500).json({ error: "Internal server error" });

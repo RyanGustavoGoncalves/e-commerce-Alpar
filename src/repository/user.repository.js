@@ -1,4 +1,8 @@
 import { PrismaClient } from "@prisma/client";
+import dotenv from "dotenv";
+import jwt from "jsonwebtoken";
+
+dotenv.config();
 
 export class UserRepository {
     constructor() {
@@ -31,7 +35,7 @@ export class UserRepository {
 
     async loginUser({ usernameOrEmail, password }) {
         try {
-            return await this.prisma.user.findFirst({
+            const user = await this.prisma.user.findFirst({
                 where: {
                     OR: [
                         {
@@ -45,6 +49,14 @@ export class UserRepository {
                     ]
                 }
             });
+
+            if (!user) {
+                throw new Error('Invalid username/email or password');
+            }
+
+            const token = jwt.sign({ id: user.id, username: user.username, email: user.email }, process.env.JWT_SECRET, { expiresIn: '3h' });
+
+            return { user: user, token: token };
         } catch (error) {
             console.error(error);
             throw error;

@@ -1,5 +1,7 @@
 import express from 'express';
-import { userRouter } from './routes/user.route.js';
+import { userRouter } from '../../routes/user.route.js';
+import { productRouter } from '../../routes/product.route.js';
+import { authenticateUser } from '../middleware/authMiddleware.js';
 
 export class Server {
     constructor(port) {
@@ -20,6 +22,7 @@ export class Server {
     setRoutes() {
         this.app.use(express.static('public'));
         this.app.use('/api', userRouter);
+        this.app.use('/api/product', authenticateUser, productRouter);
     }
 
     listen(port) {

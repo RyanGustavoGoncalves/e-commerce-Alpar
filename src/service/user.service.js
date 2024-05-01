@@ -1,7 +1,6 @@
-import e from "express";
-import { UserRepository } from "../repository/user.repository.js";
+import { UserRepository } from "../repository/User.repository.js";
 
-export class userService {
+export class UserService {
     constructor() {
         this.repository = new UserRepository();
     }

@@ -13,6 +13,7 @@ app.controller('loginController', function ($scope, $http) {
                 console.log(res.data.message);
                 localStorage.setItem("token", JSON.stringify(res.data.token));
                 localStorage.setItem("user", JSON.stringify(res.data.user));
+                window.location.href = "/home";
             })
             .catch((error) => {
                 console.error("Error:", error);

@@ -6,7 +6,8 @@ app.controller('registerController', function ($scope, $http) {
     $scope.password = "";
 
     $scope.submit = () => {
-        $http.post("http://localhost:3000/api/register", {
+        console.log($scope.username, $scope.email, $scope.password);
+        $http.post("http://localhost:3000/api/v1/register", {
             username: $scope.username,
             password: $scope.password,
             email: $scope.email,

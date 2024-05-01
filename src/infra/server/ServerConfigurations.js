@@ -1,7 +1,10 @@
 import express from 'express';
-import { userRouter } from './routes/user.route.js';
+import { userRouter } from '../../routes/user.route.js';
+import { productRouter } from '../../routes/product.route.js';
+import { authenticateUser } from '../middleware/authMiddleware.js';
 
 export class Server {
+    route = "/api/v1"
     constructor(port) {
         this.app = express();
 
@@ -19,7 +22,8 @@ export class Server {
 
     setRoutes() {
         this.app.use(express.static('public'));
-        this.app.use('/api', userRouter);
+        this.app.use(this.route, userRouter);
+        this.app.use(`${this.route}/product`, authenticateUser, productRouter);
     }
 
     listen(port) {

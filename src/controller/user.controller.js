@@ -1,16 +1,27 @@
-import { UserRepository } from "../repository/user.repository.js";
-import { userService } from "../service/user.service.js";
+import { UserRepository } from "../repository/User.repository.js";
+import { UserService } from "../service/User.service.js";
 
 export class UserController {
     constructor() {
         this.repository = new UserRepository();
-        this.service = new userService();
+        this.service = new UserService();
+    }
+    getUser = async (req, res) => {
+        try {
+            const users = await this.repository.getUsers();
+            console.log(users);
+            return res.status(200).json(users);
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ error: "Internal server error" });
+        }
     }
 
     registerUser = async (req, res) => {
         const user = req.body;
         try {
-            if (await this.service.validarUser(user)) {
+            const isValid = await this.service.validarUser(user)
+            if (isValid) {
                 const newUser = await this.repository.registerUser(user);
                 return res.status(201).json(newUser);
             } else {
@@ -25,18 +36,29 @@ export class UserController {
     loginUser = async (req, res) => {
         const user = req.body;
         try {
-            const newUser = await this.repository.loginUser(user);
-            return res.status(200).json(newUser);
+            const data = await this.repository.loginUser(user);
+            return res.status(200).json({ token: data.token, user: data.user, message: "User logged in" });
         } catch (error) {
             console.error(error);
             return res.status(500).json({ error: "Internal server error" });
         }
     }
 
-    getUser = async (req, res) => {
+    deleteUser = async (req, res) => {
+        const id = parseInt(req.params.id);
         try {
-            const users = await this.repository.getUsers();
-            return res.status(200).json(users);
+            await this.repository.deleteUser(id);
+            return res.status(204).send();
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ error: "Internal server error" });
+        }
+    }
+
+    deleteAllUsers = async (req, res) => {
+        try {
+            await this.repository.deleteAllUsers();
+            return res.status(204).send();
         } catch (error) {
             console.error(error);
             return res.status(500).json({ error: "Internal server error" });

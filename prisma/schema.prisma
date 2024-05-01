@@ -19,4 +19,33 @@ model User {
   email    String
   password String
   role     String @default("user")
+  cart     Cart[]
+}
+
+model Product {
+  id          Int        @id @default(autoincrement())
+  name        String
+  description String
+  price       Float
+  imageUrl    String
+  CartItem    CartItem[]
+}
+
+model Cart {
+  id       Int        @id @default(autoincrement())
+  user     User       @relation(fields: [userId], references: [id])
+  userId   Int
+  CartItem CartItem[]
+  total    Float
+  closed   Boolean
+}
+
+model CartItem {
+  id        Int     @id @default(autoincrement())
+  cart      Cart    @relation(fields: [cartId], references: [id])
+  cartId    Int
+  product   Product @relation(fields: [productId], references: [id])
+  productId Int
+  quantity  Int
+  price     Float
 }

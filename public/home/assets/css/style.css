@@ -71,7 +71,7 @@ body {
 }
 
 .card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-1px);
 }
 
 .card-footer {
@@ -88,6 +88,9 @@ body {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
+}
+.card-footer button:hover{
+    background-color: rgb(255, 196, 35, 0.8);
 }
 
 .card-content {

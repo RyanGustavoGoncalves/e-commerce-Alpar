@@ -9,13 +9,14 @@ export class UserController {
     getUser = async (req, res) => {
         try {
             const users = await this.repository.getUsers();
+            console.log(users);
             return res.status(200).json(users);
         } catch (error) {
             console.error(error);
             return res.status(500).json({ error: "Internal server error" });
         }
     }
-    
+
     registerUser = async (req, res) => {
         const user = req.body;
         try {
@@ -46,6 +47,16 @@ export class UserController {
         const id = parseInt(req.params.id);
         try {
             await this.repository.deleteUser(id);
+            return res.status(204).send();
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ error: "Internal server error" });
+        }
+    }
+
+    deleteAllUsers = async (req, res) => {
+        try {
+            await this.repository.deleteAllUsers();
             return res.status(204).send();
         } catch (error) {
             console.error(error);

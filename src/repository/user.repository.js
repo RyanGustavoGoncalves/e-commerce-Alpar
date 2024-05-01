@@ -51,7 +51,6 @@ export class UserRepository {
         }
     }
 
-
     async deleteUser(id) {
         try {
             return await this.prisma.user.delete({
@@ -59,6 +58,15 @@ export class UserRepository {
                     id
                 }
             });
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+
+    async deleteAllUsers() {
+        try {
+            return await this.prisma.user.deleteMany();
         } catch (error) {
             console.error(error);
             throw error;

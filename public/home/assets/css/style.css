@@ -13,15 +13,26 @@ body {
 
 .sidebar {
     grid-area: sidebar;
-    background-color: #2C2C2E;
-    color: #FFFFFF;
-    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: space-between;
+    background-color: #f8f9fa;
+    padding: 15px 0px 0px 20px;
+}
+
+.w-full {
+    width: 100%;
+}
+
+.footer-sidebar {
+    display: grid;
+    align-items: end;
+
 }
 
 .main {
     grid-area: main;
-    background-color: #121212;
-    color: #FFFFFF;
+    background-color: #92e3a9;
     padding: 20px;
 }
 
@@ -30,7 +41,7 @@ body {
 }
 
 .menu-item a {
-    color: #FFFFFF;
+    color: #333333;
     text-decoration: none;
     display: block;
     padding: 10px;
@@ -39,7 +50,7 @@ body {
 }
 
 .menu-item a:hover {
-    background-color: #1DB954;
+    background-color: #92e3a9;
 }
 
 .content {
@@ -49,9 +60,9 @@ body {
 }
 
 .card {
-    background-color: #333333;
-    color: #FFFFFF;
-    padding: 20px;
+    background-color: #f8f9fa;
+    width: 15rem;
+    height: 15rem;
     border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s;

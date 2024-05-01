@@ -17,7 +17,7 @@ body {
     grid-template-columns: 1fr;
     justify-content: space-between;
     background-color: #f8f9fa;
-    padding: 15px 0px 0px 20px;
+    padding: 15px 15px 0px 20px;
 }
 
 .w-full {
@@ -31,6 +31,7 @@ body {
 }
 
 .main {
+    overflow: auto;
     grid-area: main;
     background-color: #92e3a9;
     padding: 20px;
@@ -55,14 +56,15 @@ body {
 
 .content {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     grid-gap: 20px;
 }
 
 .card {
     background-color: #f8f9fa;
-    width: 15rem;
-    height: 15rem;
+    max-width: 15rem;
+    height: 20rem;
+    padding: .5rem;
     border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s;
@@ -72,11 +74,44 @@ body {
     transform: translateY(-5px);
 }
 
+.card-footer {
+    display: grid;
+    height: 100%;
+}
+
+.card-footer button {
+    background-color: rgb(255, 196, 35);
+    color: #fff;
+    font-size: 15px;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.card-content {
+    height: 100%;
+    display: grid;
+    place-items: center;
+}
+
 .card h3 {
+    font-size: 18px;
+    font-weight: normal;
     margin-top: 0;
     margin-bottom: 10px;
 }
 
-.card p {
+.description {
+    color: rgb(85 85 85 / 1);
+    ;
+    margin: 0;
+}
+
+.price {
+    font-weight: 900;
+    font-size: 20px;
+    color: #000;
     margin: 0;
 }

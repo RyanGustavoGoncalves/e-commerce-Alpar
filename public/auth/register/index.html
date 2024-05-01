@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="register">
+<html lang="en">
 
 <head>
     <link rel="stylesheet" href="./assets/css/style.css">
@@ -12,33 +12,46 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
 </head>
 
-<body ng-controller="registerController">
+<body ng-app="register">
     <h1>Register</h1>
-    <form>
-        <form>
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Username</label>
-                <input type="username" class="form-control" id="username" aria-describedby="usernameHelp"
-                    ng-model="username">
-                <div id="usernameHelp" class="form-text">We'll never share your username with anyone else.</div>
+    <form name="form" ng-controller="registerController" novalidate>
+        <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="username" name="username" ng-model="username" ng-required="true"
+                autocomplete="username" ng-minlength="4" ng-model-options="{ debounce: 500 }">
+            <div class="error-message" ng-show="form.username.$touched && form.username.$invalid">
+                <span ng-show="form.username.$error.required">Username is required.</span>
+                <span ng-show="form.username.$error.minlength">Username must be at least 4 characters long.</span>
             </div>
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                    ng-model="email">
-                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="email" name="email" ng-model="email" ng-required="true"
+                autocomplete="email">
+            <div class="error-message" ng-show="form.email.$touched && form.email.$invalid">
+                <span ng-show="form.email.$error.required">Email is required.</span>
+                <span ng-show="form.email.$error.email">Invalid email format.</span>
             </div>
-            <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" ng-model="password">
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" name="password" ng-model="password"
+                ng-required="true" autocomplete="current-password" ng-minlength="8"
+                ng-model-options="{ debounce: 500 }">
+            <div class="error-message" ng-show="form.password.$touched && form.password.$invalid">
+                <span ng-show="form.password.$error.required">Password is required.</span>
+                <span ng-show="form.password.$error.minlength">Password must be at least 8 characters
+                    long.</span>
             </div>
-            <button type="submit" class="btn btn-primary" ng-click="submit()">Register</button>
-            <div class="links-align">
-                <a href="../login/index.html">Already have a login? Do it now!</a>
-                <a href="../../index.html">back</a>
-            </div>
-        </form>
+        </div>
+        <button type="submit" class="btn btn-primary" ng-click="submit()" ng-disabled="form.$invalid">Register</button>
+        <div class="links-align">
+            <a href="../login/index.html">Already have a login? Do it now!</a>
+            <a href="../../index.html">back</a>
+        </div>
     </form>
+
+
 </body>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

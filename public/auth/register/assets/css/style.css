@@ -44,3 +44,8 @@ a:hover {
 .links-align a {
     font-size: 14px;
 } 
+
+.error-message span {
+    color: red;
+    font-size: 0.8rem;
+}

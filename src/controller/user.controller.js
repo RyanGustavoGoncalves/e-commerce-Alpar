@@ -20,7 +20,8 @@ export class UserController {
     registerUser = async (req, res) => {
         const user = req.body;
         try {
-            if (await this.service.validarUser(user)) {
+            const isValid = await this.service.validarUser(user)
+            if (isValid) {
                 const newUser = await this.repository.registerUser(user);
                 return res.status(201).json(newUser);
             } else {

@@ -1,3 +1,4 @@
+import e from "express";
 import { UserRepository } from "../repository/user.repository.js";
 
 export class userService {
@@ -6,14 +7,14 @@ export class userService {
     }
 
     validarUser = async (user) => {
-        const verifyUser = await this.repository.getUsers(user);
+        const verifyUser = await this.repository.getUsers();
         console.log(verifyUser);
-        verifyUser.map((user) => {
-            if (user.username === user.username || user.email === user.email) {
-                return false;
-            } else {
-                return true;
-            }
+        const existingUser = verifyUser.find((element) => {
+            console.log(element);
+            return element.username === user.username || element.email === user.email;
         });
+
+        return !existingUser;
     }
+
 }

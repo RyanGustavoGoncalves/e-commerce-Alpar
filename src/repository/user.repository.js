@@ -54,7 +54,7 @@ export class UserRepository {
                 throw new Error('Invalid username/email or password');
             }
 
-            const token = jwt.sign({ id: user.id, username: user.username, email: user.email }, process.env.JWT_SECRET, { expiresIn: '3h' });
+            const token = jwt.sign({ id: user.id, username: user.username, email: user.email }, process.env.JWT_SECRET);
 
             return { user: user, token: token };
         } catch (error) {

@@ -5,14 +5,14 @@ app.controller('loginController', function ($scope, $http) {
     $scope.password = "";
 
     $scope.submit = () => {
-        console.log($scope.usernameOrEmail, $scope.password);
-        $http.post("http://localhost:3000/api/login", {
+        $http.post("http://localhost:3000/api/v1/login", {
             usernameOrEmail: $scope.usernameOrEmail,
             password: $scope.password,
         })
             .then((res) => {
-                console.log(res.data);
-                localStorage.setItem("user", JSON.stringify(res.data));
+                console.log(res.data.message);
+                localStorage.setItem("token", JSON.stringify(res.data.token));
+                localStorage.setItem("user", JSON.stringify(res.data.user));
             })
             .catch((error) => {
                 console.error("Error:", error);

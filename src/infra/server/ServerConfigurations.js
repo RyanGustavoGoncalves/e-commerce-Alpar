@@ -22,6 +22,7 @@ export class Server {
 
     setRoutes() {
         this.app.use(express.static('public'));
+        this.app.use("/home", authenticateUser, express.static('/home'));
         this.app.use(this.route, userRouter);
         this.app.use(`${this.route}/product`, authenticateUser, productRouter);
     }

@@ -54,6 +54,10 @@ body {
     background-color: #92e3a9;
 }
 
+.active{
+    background-color: #92e3a9;
+}
+
 .content {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));

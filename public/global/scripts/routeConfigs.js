@@ -1,22 +1,23 @@
-const security = angular.module('security', []);
 
-security.controller('securityController', function ($scope, $http) {
 
-    $scope.userLocalStorageID = JSON.parse(localStorage.getItem('user'));
-    $scope.userLocalStorageToken = JSON.parse(localStorage.getItem('token'));
+const userLocalStorageID = JSON.parse(localStorage.getItem('user'));
+const userLocalStorageToken = JSON.parse(localStorage.getItem('token'));
 
-    console.log($scope.userLocalStorageToken);
-    $http.get(`http://localhost:3000/api/v1/get/${$scope.userLocalStorageID.id}`, {
-        method: 'GET',
-        headers: {
-            'Authorization': `Bearer ${$scope.userLocalStorageToken}`
+fetch(`http://localhost:3000/api/v1/get/${userLocalStorageID.id}`, {
+    method: 'GET',
+    headers: {
+        'Authorization': `Bearer ${userLocalStorageToken}`
+    }
+})
+    .then(response => {
+        response.json()
+        if (response.status === 401) {
+            console.log("Unauthorized");
+            window.location.href = "/auth/login";
         }
     })
-        .then((res) => {
-            $scope.user = res.data;
-        })
-        .catch((error) => {
-            console.error("Error:", error);
-            alert("An error occurred. Please try again later.");
-        });
-});
+    .then(data => {
+        console.log(data);
+    }).catch(error => {
+        console.log(error);
+    });

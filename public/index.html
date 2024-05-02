@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="./assets/css/style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="../assets/img/melancia.png" type="image/x-icon">
+    <link rel="shortcut icon" href="./welcomePage/assets/img/melancia.png" type="image/x-icon">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <title>Home / e-commerce</title>
 </head>
@@ -14,13 +14,18 @@
     <div class="container">
         <div class="sidebar">
             <div class="w-full">
+                <div class="carrinho">
+                    <a href="">
+                        <img src="./global/img/carrinho.png" alt="Carrinho" width="25">
+                    </a>
+                </div>
                 <div class="menu-item">
                     <a href="#" class="active">Home</a>
                 </div>
             </div>
             <div class="footer-sidebar">
                 <div>
-                    <div class="menu-item" ng-if="role === 'user'" ng-click="openModalProducts()">
+                    <div class="menu-item" ng-if="role === 'admin'" ng-click="openModalProducts()">
                         <a href="#" ng-class="{'active': modal}">Add items</a>
                     </div>
                     <div class="menu-item" ng-click="logout()">
@@ -34,7 +39,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Modal title</h5>
+                            <h5 class="modal-title">Add Products</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">

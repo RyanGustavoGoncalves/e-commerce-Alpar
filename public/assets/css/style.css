@@ -24,6 +24,18 @@ body {
     width: 100%;
 }
 
+.carrinho {
+    max-width: 25px;
+    padding: 0.3rem;
+    margin-bottom: 1rem;
+    transition: background-color 0.3s;
+}
+
+.carrinho:hover {
+    background-color: #92e3a9;
+    border-radius: 5px;
+}
+
 .footer-sidebar {
     display: grid;
     align-items: end;

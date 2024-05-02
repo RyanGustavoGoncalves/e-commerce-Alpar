@@ -74,6 +74,13 @@ body {
     transition: transform 0.3s;
 }
 
+.card-image img{
+    max-width: 240px;
+    max-height: 200px;
+    border-radius: 5px;
+    object-fit: contain;
+}
+
 .card:hover {
     transform: translateY(-1px);
 }

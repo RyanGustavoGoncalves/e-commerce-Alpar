@@ -3,6 +3,7 @@ const app = angular.module('homeApp', []);
 app.controller('homeController', function ($scope, $http) {
     $scope.role = JSON.parse(localStorage.getItem('user')).role;
     $scope.modal = false;
+    $scope.products = [];
 
 
     $scope.openModalProducts = () => {

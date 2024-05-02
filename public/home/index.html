@@ -75,18 +75,17 @@
                 </div>
             </div>
             <div class="content">
-                <div class="card">
+                <div class="card" ng-repeat="data in products">
                     <div class="card-content">
                         <div class="card-image">
-                            <img src="./assets/img/Red fresh apple isolated con a transparent background.jpg"
-                                alt="Apple" width="240px">
+                            <img src="{{data.imageUrl}}" alt="{{data.name}}">
                         </div>
                         <div class="card-footer">
                             <div>
-                                <h3>Maçã</h3>
-                                <p class="description">Uma fruta versátil, ideal para lanches rápidos e sobremesas.</p>
+                                <h3>{{data.name}}</h3>
+                                <p class="description">{{data.description}}</p>
                             </div>
-                            <p class="price">R$ 2,00/kg</p>
+                            <p class="price">{{ data.price | currency:'R$ ':2 }}</p>
                             <button>ADICIONAR</button>
                         </div>
                     </div>
@@ -98,4 +97,5 @@
 
 <script src="./assets/scripts/main.js"></script>
 <script src="../global/scripts/routeConfigs.js"></script>
+
 </html>

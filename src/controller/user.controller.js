@@ -25,7 +25,6 @@ export class UserController {
             }
 
             const token = authHeader.split(" ")[1];
-            console.log("token", token);
 
             const user = await this.repository.getUserByToken(token);
             if (!user) {

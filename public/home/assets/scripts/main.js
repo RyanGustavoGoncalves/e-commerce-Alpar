@@ -2,7 +2,6 @@ const app = angular.module('homeApp', []);
 
 app.controller('homeController', function ($scope, $http) {
     $scope.role = JSON.parse(localStorage.getItem('user')).role;
-    $scope.closed = false;
     $scope.modal = false;
 
 
@@ -23,8 +22,7 @@ app.controller('homeController', function ($scope, $http) {
             name,
             description,
             price,
-            imgUrl,
-            closed: $scope.closed,
+            imageUrl: imgUrl,
         }, {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('token')
@@ -35,4 +33,14 @@ app.controller('homeController', function ($scope, $http) {
             console.log(error);
         });
     };
+
+    $http.get("http://localhost:3000/api/v1/product", {
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+        }
+    }).then((response) => {
+        $scope.products = response.data;
+    }).catch((error) => {
+        console.log(error);
+    });
 });

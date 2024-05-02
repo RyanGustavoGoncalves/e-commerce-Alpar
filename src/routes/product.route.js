@@ -5,3 +5,4 @@ export const productRouter = Router();
 const productController = new ProductController();
 
 productRouter.post('/', productController.saveProduct);
+productRouter.get('/', productController.getProducts);

@@ -9,8 +9,8 @@ async function main() {
         },
         create: {
             username: "admin",
-            password: "admin",
             email: "admin@gmail.com",
+            password: "admin",
             role: "admin",
         }
     })

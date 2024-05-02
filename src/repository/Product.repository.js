@@ -20,4 +20,12 @@ export class ProductRepository {
             },
         });
     }
+
+    async deleteProduct(id) {
+        return await this.prisma.product.delete({
+            where: {
+                id: parseInt(id),
+            },
+        });
+    }
 }

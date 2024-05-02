@@ -31,13 +31,28 @@ export class UserController {
 
     getUserByToken = async (req, res) => {
         try {
-            const user = this.repository.getUserByToken(req.user);
+            console.log("req.headers", req.headers);
+            const authHeader = req.headers.authorization;
+            console.log("authHeader", authHeader);
+            if (!authHeader || !authHeader.startsWith("Bearer ")) {
+                return res.status(401).json({ error: "Unauthorized" });
+            }
+
+            const token = authHeader.split(" ")[1];
+            console.log("token", token);
+
+            const user = await this.repository.getUserByToken(token);
+            if (!user) {
+                return res.status(404).json({ error: "User not found" });
+            }
+
             return res.status(200).json(user);
         } catch (error) {
             console.error(error);
             return res.status(500).json({ error: "Internal server error" });
         }
     }
+
 
     registerUser = async (req, res) => {
         const user = req.body;

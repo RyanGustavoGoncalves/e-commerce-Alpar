@@ -33,6 +33,7 @@ export class UserRepository {
 
     async getUserByToken(token) {
         try {
+            console.log(token);
             const tokenFormat = token.replace(/"/g, '');
             const decoded = jwt.verify(tokenFormat, process.env.JWT_SECRET, {
                 algorithms: "HS256",

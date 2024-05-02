@@ -9,6 +9,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <title>Home / e-commerce</title>
 </head>
+
 <body ng-controller="homeController">
     <div class="container">
         <div class="sidebar">
@@ -18,11 +19,13 @@
                 </div>
             </div>
             <div class="footer-sidebar">
-                <div class="menu-item" ng-if="">
-                    <a href=""></a>
-                </div>
-                <div class="menu-item">
-                    <a href="../index.html">Logout</a>
+                <div>
+                    <div class="menu-item" ng-if="role === 'admin'">
+                        <a href="">Add items</a>
+                    </div>
+                    <div class="menu-item">
+                        <a href="../index.html">Logout</a>
+                    </div>
                 </div>
             </div>
         </div>

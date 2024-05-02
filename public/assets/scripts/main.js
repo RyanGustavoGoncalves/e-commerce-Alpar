@@ -30,18 +30,24 @@ app.controller('homeController', function ($scope, $http) {
             }
         }).then((response) => {
             console.log(response);
+            $scope.getAllProducts();
+            $scope.closeModalProducts();
         }).catch((error) => {
             console.log(error);
         });
     };
 
-    $http.get("http://localhost:3000/api/v1/product", {
-        headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem('token')
-        }
-    }).then((response) => {
-        $scope.products = response.data;
-    }).catch((error) => {
-        console.log(error);
-    });
+    $scope.getAllProducts = () => {
+        $http.get("http://localhost:3000/api/v1/product", {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            }
+        }).then((response) => {
+            $scope.products = response.data;
+        }).catch((error) => {
+            console.log(error);
+        });
+    }
+
+    $scope.getAllProducts();
 });

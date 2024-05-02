@@ -12,7 +12,7 @@ fetch(`http://localhost:3000/api/v1/get/byToken`, {
         response.json()
         if (response.status === 401) {
             console.log("Unauthorized");
-            window.location.href = "/auth/login";
+            window.location.href = "/welcomePage";
         }
     })
     .then(data => {

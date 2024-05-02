@@ -24,4 +24,15 @@ export class ProductController {
             res.status(500).json({ message: 'Erro ao salvar o produto' });
         }
     }
+
+    deleteProduct = async (req, res) => {
+        try {
+            const { id } = req.params;
+            await this.repository.deleteProduct(id);
+            res.status(204).end();
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: 'Erro ao deletar o produto' });
+        }
+    }
 }

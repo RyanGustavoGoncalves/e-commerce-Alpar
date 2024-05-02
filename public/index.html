@@ -21,7 +21,7 @@
             <div class="footer-sidebar">
                 <div>
                     <div class="menu-item" ng-if="role === 'user'" ng-click="openModalProducts()">
-                        <a href="#">Add items</a>
+                        <a href="#" ng-class="{'active': modal}">Add items</a>
                     </div>
                     <div class="menu-item" ng-click="logout()">
                         <a href="../index.html">Logout</a>
@@ -38,39 +38,41 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form name="productForm" ng-submit="submit(name, description, price, imgUrl)" novalidate>
+                            <form name="productForm" ng-submit="submit(name, description, price, imgUrl)" novalidate
+                                class="form-container">
                                 <div>
-                                    <label>Name:</label>
-                                    <input type="text" name="name" ng-model="name" required>
+                                    <label for="name">Name:</label>
+                                    <input type="text" id="name" name="name" ng-model="name" required>
                                     <span class="error-message" ng-show="productForm.name.$error.required">Name is
                                         required.</span>
                                 </div>
                                 <div>
-                                    <label>Description:</label>
-                                    <input type="text" name="description" ng-model="description" required>
+                                    <label for="description">Description:</label>
+                                    <input type="text" id="description" name="description" ng-model="description"
+                                        required>
                                     <span class="error-message"
                                         ng-show="productForm.description.$error.required">Description is
                                         required.</span>
                                 </div>
                                 <div>
-                                    <label>Price:</label>
-                                    <input type="number" name="price" ng-model="price" required>
+                                    <label for="price">Price:</label>
+                                    <input type="number" id="price" name="price" ng-model="price" required>
                                     <span class="error-message" ng-show="productForm.price.$error.required">Price is
                                         required.</span>
                                 </div>
                                 <div>
-                                    <label>Image URL:</label>
-                                    <input type="url" name="imgUrl" ng-model="imgUrl" required>
-                                    <span class="error-message" ng-show="productForm.imgUrl.$error.required">Image
-                                        URL is required.</span>
+                                    <label for="imgUrl">Image URL:</label>
+                                    <input type="url" id="imgUrl" name="imgUrl" ng-model="imgUrl" required>
+                                    <span class="error-message" ng-show="productForm.imgUrl.$error.required">Image URL
+                                        is required.</span>
                                     <span class="error-message" ng-show="productForm.imgUrl.$error.url">Invalid URL
                                         format.</span>
                                 </div>
                                 <button type="submit" ng-disabled="productForm.$invalid">Submit</button>
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
                                     ng-click="closeModalProducts()">Close</button>
+                            </form>
                         </div>
-                        </form>
                     </div>
                 </div>
             </div>

@@ -30,10 +30,8 @@ app.controller('homeController', function ($scope, $http) {
             }
         }).then((response) => {
             console.log(response);
-            if (response.ok) {
-                $scope.getAllProducts();
-                $scope.closeModalProducts();
-            }
+            $scope.getAllProducts();
+            $scope.closeModalProducts();
         }).catch((error) => {
             console.log(error);
         });

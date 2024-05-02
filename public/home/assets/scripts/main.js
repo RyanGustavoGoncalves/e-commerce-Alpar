@@ -13,6 +13,11 @@ app.controller('homeController', function ($scope, $http) {
         $scope.modal = false;
     }
 
+    $scope.logout = () => {
+        localStorage.clear();
+        window.location.href = "/";
+    }
+
     $scope.submit = (name, description, price, imgUrl) => {
         $http.post("http://localhost:3000/api/v1/product", {
             name,

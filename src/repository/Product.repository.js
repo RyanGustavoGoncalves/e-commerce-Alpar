@@ -6,6 +6,7 @@ export class ProductRepository {
     }
 
     async saveProduct({ name, description, price, imageUrl, closed }) {
+        console.log(name, description, price, imageUrl, closed);
         return await this.prisma.product.create({
             data: {
                 name,

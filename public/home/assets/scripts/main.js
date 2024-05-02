@@ -2,22 +2,28 @@ const app = angular.module('homeApp', []);
 
 app.controller('homeController', function ($scope, $http) {
     $scope.role = JSON.parse(localStorage.getItem('user')).role;
-    $scope.name = "";
-    $scope.description = "";
-    $scope.price = "";
-    $scope.imgUrl = "";
     $scope.closed = false;
+    $scope.modal = false;
 
-    $scope.submitProduct = () => {
+
+    $scope.openModalProducts = () => {
+        $scope.modal = true;
+    }
+    $scope.closeModalProducts = () => {
+        $scope.modal = false;
+    }
+
+    $scope.submit = (name, description, price, imgUrl) => {
         $http.post("http://localhost:3000/api/v1/product", {
-            Headers: {
-                Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')).token}`
-            },
-            name: $scope.name,
-            description: $scope.description,
-            price: $scope.price,
-            imgUrl: $scope.imgUrl,
+            name,
+            description,
+            price,
+            imgUrl,
             closed: $scope.closed,
+        }, {
+            headers: {
+                'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('token'))
+            }
         }).then((response) => {
             console.log(response);
         }).catch((error) => {

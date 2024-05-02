@@ -11,7 +11,7 @@ app.controller('loginController', function ($scope, $http) {
         })
             .then((res) => {
                 console.log(res.data.message);
-                localStorage.setItem("token", JSON.stringify(res.data.token));
+                localStorage.setItem("token", res.data.token);
                 localStorage.setItem("user", JSON.stringify(res.data.user));
                 window.location.href = "/home";
             })

@@ -18,19 +18,6 @@ export class UserRepository {
         }
     }
 
-    async getUserById(id) {
-        try {
-            return await this.prisma.user.findUnique({
-                where: {
-                    id
-                }
-            });
-        } catch (error) {
-            console.error(error);
-            throw error;
-        }
-    }
-
     async getUserByToken(token) {
         try {
             console.log(token);

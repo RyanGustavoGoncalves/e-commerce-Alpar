@@ -1,4 +1,4 @@
-import { UserRepository } from "../repository/User.repository.js";
+import { UserRepository } from "../repository/user.repository.js";
 import { UserService } from "../service/User.service.js";
 
 export class UserController {
@@ -17,23 +17,9 @@ export class UserController {
         }
     }
 
-    getUserById = async (req, res) => {
-        const id = parseInt(req.params.id);
-        try {
-            const user = await this.repository.getUserById(id);
-            console.log(user);
-            return res.status(200).json(user);
-        } catch (error) {
-            console.error(error);
-            return res.status(500).json({ error: "Internal server error" });
-        }
-    }
-
     getUserByToken = async (req, res) => {
         try {
-            console.log("req.headers", req.headers);
             const authHeader = req.headers.authorization;
-            console.log("authHeader", authHeader);
             if (!authHeader || !authHeader.startsWith("Bearer ")) {
                 return res.status(401).json({ error: "Unauthorized" });
             }

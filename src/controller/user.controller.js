@@ -29,6 +29,16 @@ export class UserController {
         }
     }
 
+    getUserByToken = async (req, res) => {
+        try {
+            const user = this.repository.getUserByToken(req.user);
+            return res.status(200).json(user);
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ error: "Internal server error" });
+        }
+    }
+
     registerUser = async (req, res) => {
         const user = req.body;
         try {

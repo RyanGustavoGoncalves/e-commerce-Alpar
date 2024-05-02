@@ -1,9 +1,8 @@
 
 
-const userLocalStorageID = JSON.parse(localStorage.getItem('user'));
 const userLocalStorageToken = JSON.parse(localStorage.getItem('token'));
 
-fetch(`http://localhost:3000/api/v1/get/${userLocalStorageID.id}`, {
+fetch(`http://localhost:3000/api/v1/get/token`, {
     method: 'GET',
     headers: {
         'Authorization': `Bearer ${userLocalStorageToken}`

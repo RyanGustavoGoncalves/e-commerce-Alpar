@@ -31,6 +31,24 @@ export class UserRepository {
         }
     }
 
+    async getUserByToken(token) {
+        try {
+            const tokenFormat = token.replace(/"/g, '');
+            const decoded = jwt.verify(tokenFormat, process.env.JWT_SECRET, {
+                algorithms: "HS256",
+            });
+
+            return await this.prisma.user.findUnique({
+                where: {
+                    id: decoded.id
+                }
+            });
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+
     async registerUser({ username, email, password }) {
         try {
             return await this.prisma.user.create({

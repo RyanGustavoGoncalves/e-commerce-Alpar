@@ -18,6 +18,19 @@ export class UserRepository {
         }
     }
 
+    async getUserById(id) {
+        try {
+            return await this.prisma.user.findUnique({
+                where: {
+                    id
+                }
+            });
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+
     async registerUser({ username, email, password }) {
         try {
             return await this.prisma.user.create({

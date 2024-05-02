@@ -17,6 +17,18 @@ export class UserController {
         }
     }
 
+    getUserById = async (req, res) => {
+        const id = parseInt(req.params.id);
+        try {
+            const user = await this.repository.getUserById(id);
+            console.log(user);
+            return res.status(200).json(user);
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ error: "Internal server error" });
+        }
+    }
+
     registerUser = async (req, res) => {
         const user = req.body;
         try {

@@ -18,6 +18,24 @@ export class UserRepository {
         }
     }
 
+    async getUserByToken(token) {
+        try {
+            const tokenFormat = token.replace(/"/g, '');
+            const decoded = jwt.verify(tokenFormat, process.env.JWT_SECRET, {
+                algorithms: "HS256",
+            });
+
+            return await this.prisma.user.findUnique({
+                where: {
+                    id: decoded.id
+                }
+            });
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+
     async registerUser({ username, email, password }) {
         try {
             return await this.prisma.user.create({
@@ -54,7 +72,7 @@ export class UserRepository {
                 throw new Error('Invalid username/email or password');
             }
 
-            const token = jwt.sign({ id: user.id, username: user.username, email: user.email }, process.env.JWT_SECRET);
+            const token = jwt.sign({ id: user.id, username: user.username, email: user.email }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
             return { user: user, token: token };
         } catch (error) {

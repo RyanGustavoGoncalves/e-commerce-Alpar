@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import { userRouter } from '../../routes/user.route.js';
 import { productRouter } from '../../routes/product.route.js';
 import { authenticateUser } from '../middleware/authMiddleware.js';
@@ -18,6 +19,7 @@ export class Server {
     setMiddlewares() {
         this.app.use(express.urlencoded({ extended: false }));
         this.app.use(express.json());
+        this.app.use(cors({ origin: '*' }))
     }
 
     setRoutes() {

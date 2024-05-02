@@ -5,14 +5,18 @@ export class ProductRepository {
         this.prisma = new PrismaClient();
     }
 
-    async saveProduct({ name, description, price, imageUrl, closed }) {
+    async getProducts() {
+        return await this.prisma.product.findMany();
+    }
+
+    async saveProduct({ name, description, price, imageUrl }) {
+        console.log(name, description, price, imageUrl);
         return await this.prisma.product.create({
             data: {
                 name,
                 description,
                 price,
                 imageUrl,
-                closed,
             },
         });
     }

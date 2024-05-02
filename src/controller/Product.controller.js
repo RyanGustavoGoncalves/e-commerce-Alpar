@@ -5,6 +5,16 @@ export class ProductController {
         this.repository = new ProductRepository();
     }
 
+    getProducts = async (req, res) => {
+        try {
+            const products = await this.repository.getProducts();
+            res.status(200).json(products);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: 'Erro ao buscar os produtos' });
+        }
+    }
+
     saveProduct = async (req, res) => {
         try {
             const product = await this.repository.saveProduct(req.body);

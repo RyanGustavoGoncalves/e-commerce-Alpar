@@ -11,7 +11,47 @@ async function main() {
             role: 'admin',
         },
     })
-    console.log({ admin })
+
+    const user = await prisma.user.upsert({
+        data: {
+          username: 'example_user',
+          email: 'user@example.com',
+          password: 'password123',
+          role: 'admin',
+          cart: {
+            create: {
+              total: 0,
+              closed: false,
+              CartItem: {
+                create: {
+                  quantity: 2,
+                  price: 20.50,
+                  product: {
+                    create: {
+                      name: 'Product 1',
+                      description: 'Description for Product 1',
+                      price: 10.25,
+                      imageUrl: 'https://example.com/product1.jpg',
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        include: {
+          cart: {
+            include: {
+              CartItem: {
+                include: {
+                  product: true
+                }
+              }
+            }
+          }
+        }
+      });
+    console.log({ admin, user})
 }
 main()
     .then(async () => {

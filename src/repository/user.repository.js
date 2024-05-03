@@ -28,6 +28,33 @@ export class UserRepository {
             return await this.prisma.user.findUnique({
                 where: {
                     id: decoded.id
+                }, select: {
+                    id: true,
+                    username: true,
+                    email: true,
+                    cart: {
+                        select: {
+                            id: true,
+                            total: true,
+                            closed: true,
+                            CartItem: {
+                                select: {
+                                    id: true,
+                                    quantity: true,
+                                    price: true,
+                                    product: {
+                                        select: {
+                                            id: true,
+                                            name: true,
+                                            description: true,
+                                            price: true,
+                                            imageUrl: true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             });
         } catch (error) {

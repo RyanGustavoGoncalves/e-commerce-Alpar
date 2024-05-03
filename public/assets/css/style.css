@@ -251,3 +251,13 @@ body {
 .error-message {
     color: red;
 }
+
+.buttons-card{
+    display: grid;
+    place-items: center;
+}
+.align-buttons-card{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}

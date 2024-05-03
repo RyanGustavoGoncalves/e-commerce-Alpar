@@ -3,6 +3,7 @@ const app = angular.module('homeApp', []);
 app.controller('homeController', function ($scope, $http) {
     $scope.role = JSON.parse(localStorage.getItem('user')).role;
     $scope.modal = false;
+    $scope.total = 0;
     $scope.products = [];
 
 
@@ -49,11 +50,38 @@ app.controller('homeController', function ($scope, $http) {
         });
     }
 
-    $scope.addToCart = (id) => {
-        console.log("Add to cart" + id);
+    $scope.addItem = (price) => {
+        $scope.total += price;
+        console.log("add", $scope.total);
+    }
 
-        $http.post("http://localhost:3000/api/v1/cart", {
+    $scope.removeItem = (price) => {
+        $scope.total -= price;
+        console.log($scope.total);
+    }
+
+    $scope.addToCart = (id, price) => {
+
+        console.log("Add to cart" + id);
+        // $http.post("http://localhost:3000/api/v1/cart", {
+        //     userId: JSON.parse(localStorage.getItem('user')).id,
+        //     total: price,
+        //     closed: false,
+        // }, {
+        //     headers: {
+        //         'Authorization': 'Bearer ' + localStorage.getItem('token')
+        //     }
+        // }).then((response) => {
+        //     console.log(response);
+        // }).catch((error) => {
+        //     console.log(error);
+        // });
+
+        $http.post("http://localhost:3000/api/v1/cartItem", {
             productId: id,
+            cartId: 2,
+            quantity: 1,
+            price: price,
         }, {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('token')
@@ -63,7 +91,9 @@ app.controller('homeController', function ($scope, $http) {
         }).catch((error) => {
             console.log(error);
         });
-    };
+    }
+
+
     $scope.getAllProducts();
 
 });

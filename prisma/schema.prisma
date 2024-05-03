@@ -37,7 +37,7 @@ model Cart {
   userId   Int
   CartItem CartItem[]
   total    Float
-  closed   Boolean
+  closed   Boolean @default(false)
 }
 
 model CartItem {

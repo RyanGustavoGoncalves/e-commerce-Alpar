@@ -11,7 +11,6 @@ export class CartItemController {
                 cartId,
                 productId,
                 quantity,
-                userId,
                 price
             });
         } catch (error) {

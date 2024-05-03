@@ -5,13 +5,18 @@ export class CartRepository {
         this.prisma = new PrismaClient();
     }
 
-    saveProductInCart = async () => {
+    createCart = async ({ userId, total, closed }) => {
         try {
+            console.log("repository", userId, total, closed);
             return await this.prisma.cart.create({
                 data: {
-                    productId,
-                    quantity,
-                    userId,
+                    user: {
+                        connect: {
+                            id: userId
+                        }
+                    },
+                    total,
+                    closed
                 }
             });
         } catch (error) {

@@ -69,4 +69,16 @@ export class CartItemRepository {
         }
     }
 
+    deleteItemFromCart = async (id) => {
+        try {
+            return await this.prisma.cartItem.delete({
+                where: {
+                    id: parseInt(id)
+                }
+            });
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
 }

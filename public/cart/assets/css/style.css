@@ -1,0 +1,37 @@
+.cart-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.product-card {
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #f9f9f9;
+}
+
+.product-image {
+    max-width: 100px;
+    max-height: 100px;
+    margin-right: 10px;
+}
+
+.product-details {
+    flex-grow: 1;
+}
+
+.product-title {
+    font-weight: bold;
+}
+
+.product-price {
+    color: green;
+    font-weight: bold;
+}
+
+.remove-button {
+    color: red;
+    cursor: pointer;
+}

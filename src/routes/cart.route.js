@@ -5,3 +5,4 @@ export const cartRouter = Router();
 const cartController = new CartController();
 
 cartRouter.post('/', cartController.createCart); 
+cartRouter.get('/:id', cartController.getAllCartItemFromCart);

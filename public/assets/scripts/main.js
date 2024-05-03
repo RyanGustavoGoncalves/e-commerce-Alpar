@@ -6,6 +6,7 @@ app.controller('homeController', function ($scope, $http) {
     $scope.cartItems = 0;
     $scope.quantity = 1;
     $scope.products = [];
+    $scope.cartId;
 
     $scope.openModalProducts = () => {
         $scope.modal = true;
@@ -81,6 +82,7 @@ app.controller('homeController', function ($scope, $http) {
 
             const isLastCartClosed = lastCart.closed;
             console.log("isLastCartClosed", isLastCartClosed);
+            localStorage.setItem("cartID", userDetail.cart[lastCartIndex].id)
             if (isLastCartClosed) {
                 console.log("O último carrinho para o usuário", userDetail.username, "está fechado. Criando um novo carrinho...");
                 $scope.createCart();

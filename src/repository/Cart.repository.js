@@ -24,4 +24,38 @@ export class CartRepository {
             throw error;
         }
     }
+
+    getAllCartItemFromCart = async (id) => {
+        try {
+            console.log("repository", id);
+            return await this.prisma.cart.findUnique({
+                where: {
+                    id: Number(id)
+                },
+                select: {
+                    CartItem:
+                    {
+                        select: {
+                            id: true,
+                            quantity: true,
+                            price: true,
+                            product: {
+                                select: {
+                                    id: true,
+                                    name: true,
+                                    description: true,
+                                    price: true,
+                                    imageUrl: true
+                                }
+                            }
+                        }
+                    }
+
+                }
+            });
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
 }

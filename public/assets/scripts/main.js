@@ -49,5 +49,21 @@ app.controller('homeController', function ($scope, $http) {
         });
     }
 
+    $scope.addToCart = (id) => {
+        console.log("Add to cart" + id);
+
+        $http.post("http://localhost:3000/api/v1/cart", {
+            productId: id,
+        }, {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            }
+        }).then((response) => {
+            console.log(response);
+        }).catch((error) => {
+            console.log(error);
+        });
+    };
     $scope.getAllProducts();
+
 });

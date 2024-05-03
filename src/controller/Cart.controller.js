@@ -1,3 +1,5 @@
+import { CartRepository } from "../repository/Cart.repository.js";
+
 export class CartController {
     constructor() {
         this.cartRepository = new CartRepository();

@@ -3,6 +3,8 @@ import cors from 'cors';
 import { userRouter } from '../../routes/user.route.js';
 import { productRouter } from '../../routes/product.route.js';
 import { authenticateUser } from '../middleware/authMiddleware.js';
+import { cartRouter } from '../../routes/cart.route.js';
+import { cartItemRouter } from '../../routes/cartItem.route.js';
 
 export class Server {
     route = "/api/v1"
@@ -27,6 +29,8 @@ export class Server {
         this.app.use("/home", authenticateUser, express.static('/home'));
         this.app.use(this.route, userRouter);
         this.app.use(`${this.route}/product`, authenticateUser, productRouter);
+        this.app.use(`${this.route}/cart`, authenticateUser, cartRouter);
+        this.app.use(`${this.route}/cartItem`, authenticateUser, cartItemRouter);
     }
 
     listen(port) {

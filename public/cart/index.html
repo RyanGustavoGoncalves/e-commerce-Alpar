@@ -20,9 +20,12 @@
                 <img src="{{ cartItem.product.imageUrl }}" alt="{{ cartItem.product.name }}" class="product-image">
                 <div class="product-details">
                     <div class="product-title">{{ cartItem.product.name }}</div>
+                    <div>Quantidade: {{cartItem.quantity}}</div>
                     <div class="product-price">{{ cartItem.price | currency:'R$ ':2 }}</div>
                 </div>
+                <button ng-click="addQuantity(cartItem.id)">+</button>
                 <div class="remove-button">Remover</div>
+                <button ng-click="removeQuantity(cartItem.id, cartItem.quantity)">-</button>
             </div>
         </div>
     </div>

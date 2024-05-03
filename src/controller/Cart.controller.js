@@ -16,6 +16,7 @@ export class CartController {
             res.status(400).json({ message: error.message });
         }
     }
+
     getAllCartItemFromCart = async (req, res) => {
         try {
             const cartID = req.params.id;
@@ -25,4 +26,5 @@ export class CartController {
             res.status(400).json({ message: error.message });
         }
     }
+
 }

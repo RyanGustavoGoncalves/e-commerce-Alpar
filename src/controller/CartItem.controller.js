@@ -6,6 +6,7 @@ export class CartItemController {
         this.repository = new CartItemRepository();
         this.service = new CartItemService();
     }
+
     saveItemInCart = async (req, res) => {
         const { cartId, productId, quantity, price } = req.body;
         try {
@@ -19,6 +20,16 @@ export class CartItemController {
         } catch (error) {
             console.error(error);
             throw error;
+        }
+    }
+
+    updateQuantity = async (req, res) => {
+        try {
+            const { cartID, quantity } = req.body;
+            const cart = await this.repository.updateQuantity(cartID, quantity);
+            res.status(200).json(cart);
+        } catch (error) {
+            res.status(400).json({ message: error.message });
         }
     }
 }

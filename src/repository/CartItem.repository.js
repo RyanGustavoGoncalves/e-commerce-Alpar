@@ -51,4 +51,21 @@ export class CartItemRepository {
         }
     }
 
+    updateQuantity = async (cartId, quantity) => {
+        try {
+            return await this.prisma.cartItem.update({
+                where: {
+                    cartId
+                }
+            }, {
+                data: {
+                    quantity
+                }
+            });
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+
 }

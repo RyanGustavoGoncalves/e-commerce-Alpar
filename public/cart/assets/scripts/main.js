@@ -31,6 +31,19 @@ app.controller('cartController', function ($scope, $http) {
         });
     }
 
+    $scope.deleteItemFromCart = (id) => {
+        $http.delete(`http://localhost:3000/api/v1/cartItem/${id}`, {
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("token"),
+            }
+        }).then((response) => {
+            console.log(response);
+            $scope.getAllCartItemFromCart();
+        }).catch((error) => {
+            console.log(error);
+        });
+    }
+
     $scope.addQuantity = (id, quantity, priceCardItem, priceProduct) => {
         quantity += 1;
         const price = priceCardItem + priceProduct;
@@ -39,6 +52,7 @@ app.controller('cartController', function ($scope, $http) {
 
     $scope.removeQuantity = (id, quantity, priceCardItem, priceProduct) => {
         if (quantity === 1) {
+            $scope.deleteItemFromCart(id);
             return;
         }
         const price = priceProduct - priceCardItem;

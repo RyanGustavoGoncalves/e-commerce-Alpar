@@ -6,3 +6,4 @@ const cartItemController = new CartItemController();
 
 cartItemRouter.post('/', cartItemController.saveItemInCart); 
 cartItemRouter.put('/:cartItem', cartItemController.updateQuantity);
+cartItemRouter.delete('/:cartItem', cartItemController.deleteItemFromCart);

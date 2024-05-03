@@ -94,7 +94,11 @@
                                 <p class="description">{{data.description}}</p>
                             </div>
                             <p class="price">{{ data.price | currency:'R$ ':2 }}</p>
-                            <button type="button" ng-click="addToCart(data.id, data.price)">ADICIONAR</button>
+                            <div>
+                                <button type="button" ng-click="addToCart(data.id, data.price)">ADICIONAR</button>
+                                <button type="button" ng-click="addToCart(data.id, data.price)"
+                                    ng-if="role === 'admin'">EDITAR</button>
+                            </div>
                         </div>
                     </div>
                 </div>

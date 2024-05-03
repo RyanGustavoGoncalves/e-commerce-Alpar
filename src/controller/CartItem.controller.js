@@ -34,4 +34,13 @@ export class CartItemController {
             res.status(400).json({ message: error.message });
         }
     }
+    deleteItemFromCart = async (req, res) => {
+        try {
+            const id = req.params.cartItem;
+            await this.repository.deleteItemFromCart(id);
+            res.status(204).json();
+        } catch (error) {
+            res.status(400).json({ message: error.message });
+        }
+    }
 }

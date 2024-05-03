@@ -3,9 +3,9 @@ const app = angular.module('homeApp', []);
 app.controller('homeController', function ($scope, $http) {
     $scope.role = JSON.parse(localStorage.getItem('user')).role;
     $scope.modal = false;
-    $scope.total = 0;
+    $scope.cartItems = 0;
+    $scope.quantity = 1;
     $scope.products = [];
-
 
     $scope.openModalProducts = () => {
         $scope.modal = true;
@@ -50,38 +50,11 @@ app.controller('homeController', function ($scope, $http) {
         });
     }
 
-    $scope.addItem = (price) => {
-        $scope.total += price;
-        console.log("add", $scope.total);
-    }
-
-    $scope.removeItem = (price) => {
-        $scope.total -= price;
-        console.log($scope.total);
-    }
-
-    $scope.addToCart = (id, price) => {
-
-        console.log("Add to cart" + id);
-        // $http.post("http://localhost:3000/api/v1/cart", {
-        //     userId: JSON.parse(localStorage.getItem('user')).id,
-        //     total: price,
-        //     closed: false,
-        // }, {
-        //     headers: {
-        //         'Authorization': 'Bearer ' + localStorage.getItem('token')
-        //     }
-        // }).then((response) => {
-        //     console.log(response);
-        // }).catch((error) => {
-        //     console.log(error);
-        // });
-
-        $http.post("http://localhost:3000/api/v1/cartItem", {
-            productId: id,
-            cartId: 2,
-            quantity: 1,
-            price: price,
+    $scope.createCart = () => {
+        $http.post("http://localhost:3000/api/v1/cart", {
+            userId: JSON.parse(localStorage.getItem('user')).id,
+            total: 0,
+            closed: false,
         }, {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('token')
@@ -93,7 +66,53 @@ app.controller('homeController', function ($scope, $http) {
         });
     }
 
+    $scope.addToCart = (id, price) => {
+        console.log(userDetails);
+        for (let i = 0; i < userDetails.length; i++) {
+            const userDetail = userDetails[i];
+
+            const lastCartIndex = userDetail.cart.length - 1;
+            const lastCart = userDetail.cart[lastCartIndex];
+
+            const isLastCartClosed = lastCart.closed;
+            console.log("isLastCartClosed", isLastCartClosed);
+            if (isLastCartClosed) {
+                console.log("O último carrinho para o usuário", userDetail.username, "está fechado. Criando um novo carrinho...");
+                $scope.createCart();
+            } else {
+                console.log("O último carrinho para o usuário", userDetail.username, "está aberto. Mantendo o mesmo carrinho...");
+                $http.post("http://localhost:3000/api/v1/cartItem", {
+                    productId: id,
+                    cartId: userDetail.cart[lastCartIndex].id,
+                    quantity: 1,
+                    price: price,
+                }, {
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('token')
+                    }
+                }).then((response) => {
+                    console.log(response.data);
+                    $scope.countItems();
+
+                })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            }
+        }
+
+    }
 
     $scope.getAllProducts();
-
+    $scope.countItems = () => {
+        userDetailsPromise.then(() => {
+            userDetails.forEach(user => {
+                $scope.cartItems = 0;
+                user.cart.forEach(cart => {
+                    $scope.cartItems += cart.CartItem.length;
+                });
+            });
+        });
+    }
+    $scope.countItems();
 });

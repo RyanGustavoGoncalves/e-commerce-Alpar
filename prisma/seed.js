@@ -12,7 +12,7 @@ async function main() {
         },
     })
 
-    const user = await prisma.user.upsert({
+    const user = await prisma.user.create({
         data: {
           username: 'example_user',
           email: 'user@example.com',

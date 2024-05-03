@@ -79,6 +79,7 @@ body {
 .card {
     background-color: #f8f9fa;
     max-width: 15rem;
+    min-height: 22rem;
     padding: .5rem;
     border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -252,12 +253,22 @@ body {
     color: red;
 }
 
-.buttons-card{
-    display: grid;
-    place-items: center;
+.carrinho {
+    position: relative;
+    display: inline-block;
 }
-.align-buttons-card{
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+
+.item-quantidade {
+    position: absolute;
+    top: 15px;
+    right: -18px; 
+    background-color: rgb(255, 196, 35);
+    color: white;
+    border-radius: 50%;
+    padding: 5px;
+    font-size: 12px;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
 }

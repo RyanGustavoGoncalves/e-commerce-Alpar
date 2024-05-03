@@ -15,9 +15,10 @@ app.controller('cartController', function ($scope, $http) {
         });
     }
 
-    $scope.updateQuantity = (id) => {
-        $http.put(`http://localhost:3000/api/v1/cart/${id}`, {
-            quantity: $scope.quantity
+    $scope.updateQuantity = (id, quantity, price) => {
+        $http.put(`http://localhost:3000/api/v1/cartItem/${id}`, {
+            quantity,
+            price
         }, {
             headers: {
                 "Authorization": "Bearer " + localStorage.getItem("token"),
@@ -30,16 +31,20 @@ app.controller('cartController', function ($scope, $http) {
         });
     }
 
-    $scope.addQuantity = (id, quantity) => {
-        console.log("addQuantity ", quantity);
+    $scope.addQuantity = (id, quantity, priceCardItem, priceProduct) => {
         quantity += 1;
-        $scope.updateQuantity(id);
+        const price = priceCardItem + priceProduct;
+        $scope.updateQuantity(id, quantity, price);
     }
 
-    $scope.removeQuantity = (id, quantity) => {
-        console.log("removeQuantity", quantity);
+    $scope.removeQuantity = (id, quantity, priceCardItem, priceProduct) => {
+        if (quantity === 1) {
+            return;
+        }
+        const price = priceProduct - priceCardItem;
+        console.log(price);
         quantity -= 1;
-        $scope.updateQuantity(id);
+        $scope.updateQuantity(id, quantity, price);
     }
 
     $scope.getAllCartItemFromCart();

@@ -5,4 +5,4 @@ export const cartItemRouter = Router();
 const cartItemController = new CartItemController();
 
 cartItemRouter.post('/', cartItemController.saveItemInCart); 
-cartItemRouter.get('/:cartItem', cartItemController.updateQuantity);
+cartItemRouter.put('/:cartItem', cartItemController.updateQuantity);

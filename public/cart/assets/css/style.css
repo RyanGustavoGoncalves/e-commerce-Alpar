@@ -26,12 +26,13 @@
     font-weight: bold;
 }
 
-.product-price {
-    color: green;
-    font-weight: bold;
+.btn-addRemove button{
+    background: rgb(255, 196, 35);
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
 }
 
-.remove-button {
-    color: red;
-    cursor: pointer;
+.remove{
+    background: rgb(236, 27, 27) !important;
 }

@@ -51,14 +51,15 @@ export class CartItemRepository {
         }
     }
 
-    updateQuantity = async (cartId, quantity) => {
+    updateQuantity = async (id, quantity, price) => {
         try {
+            console.log(id, quantity);
             return await this.prisma.cartItem.update({
                 where: {
-                    cartId
-                }
-            }, {
+                    id: parseInt(id)
+                },
                 data: {
+                    price,
                     quantity
                 }
             });

@@ -29,4 +29,26 @@ export class CartItemRepository {
         }
     }
 
+    getCartItems = async () => {
+        try {
+            return await this.prisma.cartItem.findMany();
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+
+    getItemsInCart = async (cartId) => {
+        try {
+            return await this.prisma.cartItem.findMany({
+                where: {
+                    cartId
+                }
+            });
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+
 }

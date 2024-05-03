@@ -70,6 +70,11 @@ app.controller('homeController', function ($scope, $http) {
         console.log(userDetails);
         for (let i = 0; i < userDetails.length; i++) {
             const userDetail = userDetails[i];
+            if (userDetail.cart === undefined || userDetail.cart.length === 0) {
+                console.log("O usuário", userDetail.username, "não tem carrinhos. Criando um novo carrinho...");
+                $scope.createCart();
+                return;
+            }
 
             const lastCartIndex = userDetail.cart.length - 1;
             const lastCart = userDetail.cart[lastCartIndex];
@@ -91,16 +96,17 @@ app.controller('homeController', function ($scope, $http) {
                         'Authorization': 'Bearer ' + localStorage.getItem('token')
                     }
                 }).then((response) => {
-                    console.log(response.data);
+                    console.log(response);
                     $scope.countItems();
-
                 })
                     .catch((error) => {
+                        if (error.status === 400) {
+                            alert("Item já está no carrinho");
+                        }
                         console.log(error);
                     });
             }
         }
-
     }
 
     $scope.getAllProducts();

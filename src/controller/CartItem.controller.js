@@ -9,8 +9,13 @@ export class CartItemController {
     saveItemInCart = async (req, res) => {
         const { cartId, productId, quantity, price } = req.body;
         try {
-            const cartItem = await this.repository.saveItemInCart({ cartId, productId, quantity, price });
-            res.status(201).json(cartItem);
+            const exist = await this.service.verifItemInCart(productId, cartId);
+            if (!exist) {
+                const cartItem = await this.repository.saveItemInCart({ cartId, productId, quantity, price });
+                res.status(201).json(cartItem);
+            } else {
+                res.status(400).json({ message: "Item already in cart" });
+            }
         } catch (error) {
             console.error(error);
             throw error;

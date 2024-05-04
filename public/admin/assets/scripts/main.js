@@ -2,6 +2,7 @@ const app = angular.module('homeApp', []);
 
 app.controller('homeController', function ($scope, $http) {
     $scope.role = JSON.parse(localStorage.getItem('user')).role;
+    $scope.modal = false;
     $scope.cartItems = 0;
     $scope.quantity = 1;
     $scope.products = [];
@@ -9,11 +10,58 @@ app.controller('homeController', function ($scope, $http) {
     $scope.modalRender = 0;
     $scope.productIdUpdate = 0;
 
+    $scope.openModalProducts = (value, id) => {
+        $scope.modalRender = value;
+        $scope.productIdUpdate = id;
+        $scope.modal = true;
+    }
+    $scope.closeModalProducts = () => {
+        $scope.modal = false;
+    }
+
     $scope.logout = () => {
         localStorage.clear();
         window.location.href = "/";
     }
-    
+
+    $scope.submit = (name, description, price, imgUrl) => {
+        $http.post("http://localhost:3000/api/v1/product", {
+            name,
+            description,
+            price,
+            imageUrl: imgUrl,
+        }, {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            }
+        }).then((response) => {
+            console.log(response);
+            $scope.getAllProducts();
+            $scope.closeModalProducts();
+        }).catch((error) => {
+            console.log(error);
+        });
+    };
+
+    $scope.submitUpdateProduct = (name, description, price, imageUrl) => {
+        $http.put(`http://localhost:3000/api/v1/product/${$scope.productIdUpdate}`, {
+            name,
+            description,
+            price,
+            imageUrl,
+        }, {
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem('token')
+            }
+        }).then((response) => {
+            console.log(response);
+            $scope.getAllProducts();
+            $scope.closeModalProducts();
+        }).catch((error) => {
+            console.log(error);
+        });
+    }
+
     $scope.getAllProducts = () => {
         $http.get("http://localhost:3000/api/v1/product", {
             headers: {

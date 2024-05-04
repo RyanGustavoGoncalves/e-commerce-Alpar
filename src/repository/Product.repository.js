@@ -28,4 +28,15 @@ export class ProductRepository {
             },
         });
     }
+
+    async updateProduct(id, product) {
+        return await this.prisma.product.update({
+            where: {
+                id: parseInt(id),
+            },
+            data: {
+                ...product,
+            },
+        });
+    }
 }

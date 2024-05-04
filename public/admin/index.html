@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="homeApp">
+
+<head>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./welcomePage/assets/img/melancia.png" type="image/x-icon">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <title>Home / e-commerce</title>
+</head>
+
+<body ng-controller="homeController">
+    <div class="container">
+        <div class="sidebar">
+            <div class="w-full">
+                <div class="menu-item">
+                    <a href="../index.html">Home</a>
+                </div>
+            </div>
+            <div class="footer-sidebar">
+                <div>
+                    <div class="menu-item" ng-if="role === 'admin'" ng-click="openModalProducts(1)">
+                        <a href="#" ng-class="{'active': modal}">Add items</a>
+                    </div>
+                    <div class="menu-item" ng-if="role === 'admin'">
+                        <a href="#" class="active">Admin</a>
+                    </div>
+                    <div class="menu-item" ng-click="logout()">
+                        <a href="../index.html">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main">
+            <div class="modal" ng-if="modal">
+                <div class="modal-dialog">
+                    <div class="modal-content" ng-if="modalRender === 1">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Add Products</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form name="productForm" ng-submit="submit(name, description, price, imgUrl)" novalidate
+                                class="form-container">
+                                <div>
+                                    <label for="name">Name:</label>
+                                    <input type="text" id="name" name="name" ng-model="name" required>
+                                    <span class="error-message" ng-show="productForm.name.$error.required">Name is
+                                        required.</span>
+                                </div>
+                                <div>
+                                    <label for="description">Description:</label>
+                                    <input type="text" id="description" name="description" ng-model="description"
+                                        required>
+                                    <span class="error-message"
+                                        ng-show="productForm.description.$error.required">Description is
+                                        required.</span>
+                                </div>
+                                <div>
+                                    <label for="price">Price:</label>
+                                    <input type="number" id="price" name="price" ng-model="price" required>
+                                    <span class="error-message" ng-show="productForm.price.$error.required">Price is
+                                        required.</span>
+                                </div>
+                                <div>
+                                    <label for="imgUrl">Image URL:</label>
+                                    <input type="url" id="imgUrl" name="imgUrl" ng-model="imgUrl" required>
+                                    <span class="error-message" ng-show="productForm.imgUrl.$error.required">Image URL
+                                        is required.</span>
+                                    <span class="error-message" ng-show="productForm.imgUrl.$error.url">Invalid URL
+                                        format.</span>
+                                </div>
+                                <button type="submit" ng-disabled="productForm.$invalid">Submit</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                    ng-click="closeModalProducts()">Close</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-content" ng-if="modalRender === 2">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Update products</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form name="productForm" ng-submit="submitUpdateProduct(name, description, price, imgUrl)"
+                                novalidate class="form-container">
+                                <div>
+                                    <label for="name">Name:</label>
+                                    <input type="text" id="name" name="name" ng-model="name" required>
+                                    <span class="error-message" ng-show="productForm.name.$error.required">Name is
+                                        required.</span>
+                                </div>
+                                <div>
+                                    <label for="description">Description:</label>
+                                    <input type="text" id="description" name="description" ng-model="description"
+                                        required>
+                                    <span class="error-message"
+                                        ng-show="productForm.description.$error.required">Description is
+                                        required.</span>
+                                </div>
+                                <div>
+                                    <label for="price">Price:</label>
+                                    <input type="number" id="price" name="price" ng-model="price" required>
+                                    <span class="error-message" ng-show="productForm.price.$error.required">Price is
+                                        required.</span>
+                                </div>
+                                <div>
+                                    <label for="imgUrl">Image URL:</label>
+                                    <input type="url" id="imgUrl" name="imgUrl" ng-model="imgUrl" required>
+                                    <span class="error-message" ng-show="productForm.imgUrl.$error.required">Image URL
+                                        is required.</span>
+                                    <span class="error-message" ng-show="productForm.imgUrl.$error.url">Invalid URL
+                                        format.</span>
+                                </div>
+                                <button type="submit" ng-disabled="productForm.$invalid">Submit</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                    ng-click="closeModalProducts()">Close</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content">
+                <div class="card" ng-repeat="data in products">
+                    <div class="card-content">
+                        <div class="card-image">
+                            <img src="{{data.imageUrl}}" alt="{{data.name}}">
+                        </div>
+                        <div class="card-footer">
+                            <div>
+                                <h3>{{data.name}}</h3>
+                                <p class="description">{{data.description}}</p>
+                            </div>
+                            <p class="price">{{ data.price | currency:'R$ ':2 }}</p>
+                            <div>
+                                <button type="button" ng-click="addToCart(data.id, data.price)">ADICIONAR</button>
+                                <button type="button" ng-if="role === 'admin'"
+                                    ng-click="openModalProducts(2, data.id)">EDITAR</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="../global/scripts/routeConfigs.js"></script>
+<script src="./assets/scripts/main.js"></script>
+
+</html>

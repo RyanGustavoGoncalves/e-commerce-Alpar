@@ -7,8 +7,12 @@ app.controller('homeController', function ($scope, $http) {
     $scope.quantity = 1;
     $scope.products = [];
     $scope.cartId;
+    $scope.modalRender = 0;
+    $scope.productIdUpdate = 0;
 
-    $scope.openModalProducts = () => {
+    $scope.openModalProducts = (value, id) => {
+        $scope.modalRender = value;
+        $scope.productIdUpdate = id;
         $scope.modal = true;
     }
     $scope.closeModalProducts = () => {
@@ -38,6 +42,26 @@ app.controller('homeController', function ($scope, $http) {
             console.log(error);
         });
     };
+
+    $scope.submitUpdateProduct = (name, description, price, imageUrl) => {
+        $http.put("http://localhost:3000/api/v1/product", {
+            id: $scope.productIdUpdate,
+            name,
+            description,
+            price,
+            imageUrl,
+        }, {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            }
+        }).then((response) => {
+            console.log(response);
+            $scope.getAllProducts();
+            $scope.closeModalProducts();
+        }).catch((error) => {
+            console.log(error);
+        });
+    }
 
     $scope.getAllProducts = () => {
         $http.get("http://localhost:3000/api/v1/product", {

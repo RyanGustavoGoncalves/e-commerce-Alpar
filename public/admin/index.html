@@ -33,6 +33,10 @@
             </div>
         </div>
         <div class="main">
+            <div class="filter">
+                <h1>Admin</h1>
+                <input type="search" placeholder="Busque pelo produto..." ng-model="searchTerm" ng-change="searchProducts()">
+            </div>
             <div class="modal" ng-if="modal">
                 <div class="modal-dialog">
                     <div class="modal-content" ng-if="modalRender === 1">

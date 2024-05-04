@@ -9,6 +9,7 @@ app.controller('homeController', function ($scope, $http) {
     $scope.cartId;
     $scope.modalRender = 0;
     $scope.productIdUpdate = 0;
+    $scope.searchTerm = '';
 
     $scope.openModalProducts = (value, id) => {
         $scope.modalRender = value;
@@ -161,4 +162,14 @@ app.controller('homeController', function ($scope, $http) {
         });
     }
     $scope.countItems();
+
+    $scope.searchProducts = () => {
+        if (!$scope.searchTerm.trim()) {
+            $scope.getAllProducts();
+        } else {
+            $scope.products = $scope.products.filter(product => {
+                return product.name.toLowerCase().includes($scope.searchTerm.toLowerCase());
+            });
+        }
+    };
 });

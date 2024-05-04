@@ -280,6 +280,19 @@ body {
     line-height: 20px;
 }
 
+.filter{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.filter input{
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
 @media screen and (max-width: 790px) {
     .card {
         max-width: 100%;

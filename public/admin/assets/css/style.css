@@ -119,6 +119,13 @@ body {
     background-color: rgb(255, 196, 35, 0.8);
 }
 
+.align-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: .8rem;
+}
+
 .card-content {
     height: 100%;
     display: grid;
@@ -261,7 +268,7 @@ body {
 .item-quantidade {
     position: absolute;
     top: 15px;
-    right: -18px; 
+    right: -18px;
     background-color: rgb(255, 196, 35);
     color: white;
     border-radius: 50%;
@@ -271,4 +278,11 @@ body {
     height: 20px;
     text-align: center;
     line-height: 20px;
+}
+
+@media screen and (max-width: 790px) {
+    .card {
+        max-width: 100%;
+    }
+
 }

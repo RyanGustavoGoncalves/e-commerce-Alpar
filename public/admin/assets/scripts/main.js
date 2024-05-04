@@ -62,6 +62,21 @@ app.controller('homeController', function ($scope, $http) {
         });
     }
 
+    $scope.removeProduct = () => {
+        $http.delete(`http://localhost:3000/api/v1/product/${$scope.productIdUpdate}`, {
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem('token')
+            }
+        }).then((response) => {
+            console.log(response);
+            $scope.getAllProducts();
+            $scope.closeModalProducts();
+        }).catch((error) => {
+            console.log(error);
+        });
+
+    }
+
     $scope.getAllProducts = () => {
         $http.get("http://localhost:3000/api/v1/product", {
             headers: {

@@ -36,6 +36,9 @@
             </div>
         </div>
         <div class="main">
+            <div class="filter">
+                <input type="search" placeholder="Busque pelo produto..." ng-model="searchTerm" ng-change="searchProducts()">
+            </div>
             <div class="content">
                 <div class="card" ng-repeat="data in products">
                     <div class="card-content">

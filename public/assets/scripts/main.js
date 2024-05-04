@@ -8,6 +8,7 @@ app.controller('homeController', function ($scope, $http) {
     $scope.cartId;
     $scope.modalRender = 0;
     $scope.productIdUpdate = 0;
+    $scope.searchTerm = '';
 
     $scope.logout = () => {
         localStorage.clear();
@@ -98,4 +99,13 @@ app.controller('homeController', function ($scope, $http) {
         });
     }
     $scope.countItems();
+    $scope.searchProducts = () => {
+        if (!$scope.searchTerm.trim()) {
+            $scope.getAllProducts();
+        } else {
+            $scope.products = $scope.products.filter(product => {
+                return product.name.toLowerCase().includes($scope.searchTerm.toLowerCase());
+            });
+        }
+    };
 });

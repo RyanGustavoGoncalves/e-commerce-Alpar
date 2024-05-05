@@ -75,6 +75,7 @@ app.controller('homeController', function ($scope, $http) {
                     }
                 }).then((response) => {
                     console.log(response);
+                    alert("Item adicionado ao carrinho");
                     $scope.countItems();
                 })
                     .catch((error) => {

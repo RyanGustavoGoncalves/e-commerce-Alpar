@@ -1,3 +1,71 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: 250px auto;
+    grid-template-rows: auto;
+    grid-template-areas: "sidebar main";
+    height: 100vh;
+}
+
+.sidebar {
+    grid-area: sidebar;
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: space-between;
+    background-color: #f8f9fa;
+    padding: 15px 15px 0px 20px;
+}
+
+.w-full {
+    width: 100%;
+}
+
+.carrinho {
+    max-width: 35px;
+    padding: 0.3rem;
+    margin-bottom: 1rem;
+    transition: background-color 0.3s;
+}
+
+.carrinho:hover {
+    background-color: #92e3a9;
+    border-radius: 5px;
+}
+
+.footer-sidebar {
+    display: grid;
+    align-items: end;
+
+}
+
+.menu-item {
+    margin-bottom: 10px;
+}
+
+.menu-item a {
+    color: #333333 !important;
+    text-decoration: none !important;
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.menu-item a:hover {
+    background-color: #92e3a9;
+}
+
+.active {
+    background-color: #92e3a9;
+    border-radius: 5px;
+}
+
+.main-content {
+    overflow: auto;
+    grid-area: main;
+    background-color: #92e3a9;
+    padding: 20px;
+}
+
 .cart-container {
     max-width: 800px;
     margin: 0 auto;
@@ -26,13 +94,13 @@
     font-weight: bold;
 }
 
-.btn-addRemove button{
+.btn-addRemove button {
     background: rgb(255, 196, 35);
     border-radius: 5px;
     padding: 5px 10px;
     cursor: pointer;
 }
 
-.remove{
+.remove {
     background: rgb(236, 27, 27) !important;
 }

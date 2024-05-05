@@ -281,7 +281,7 @@ body {
 }
 
 .filter input{
-    padding: 5px;
+    padding: .6ren;
     border-radius: 5px;
     border: 1px solid #ccc;
 }

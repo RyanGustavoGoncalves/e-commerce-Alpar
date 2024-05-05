@@ -56,7 +56,6 @@ app.controller('cartController', function ($scope, $http) {
             return;
         }
         const price = priceProduct - priceCardItem;
-        console.log(price);
         quantity -= 1;
         $scope.updateQuantity(id, quantity, price);
     }

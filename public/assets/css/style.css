@@ -273,14 +273,14 @@ body {
     line-height: 20px;
 }
 
-.filter{
+.filter {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1rem;
 }
 
-.filter input{
+.filter input {
     padding: .6rem;
     border-radius: 5px;
     border: 1px solid #ccc;

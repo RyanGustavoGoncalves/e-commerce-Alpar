@@ -17,6 +17,10 @@
     <div class="cart-container">
         <h2>Carrinho de Compras</h2>
         <div class="product-card">
+            <div ng-if="cart.length === 0" style="text-align: center;">
+                <h3>Adicione items ao seu carrinho!</h3>
+                <button class="btn btn-link"><a href="../index.html">Voltar para a home!</a></button>
+            </div>
             <div class="d-flex align-items-center" ng-repeat="cartItem in cart">
                 <img src="{{ cartItem.product.imageUrl }}" alt="{{ cartItem.product.name }}" class="product-image">
                 <div class="product-details">

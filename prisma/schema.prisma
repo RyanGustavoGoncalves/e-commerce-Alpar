@@ -38,6 +38,8 @@ model Cart {
   CartItem CartItem[]
   total    Float
   closed   Boolean @default(false)
+  dateCreated DateTime @default(now())
+  dateClosed DateTime?
 }
 
 model CartItem {

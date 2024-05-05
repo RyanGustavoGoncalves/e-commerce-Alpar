@@ -1,11 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="homeApp">
+
 <head>
+    <link rel="stylesheet" href="./assets/css/style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Finalizado</title>
+    <link rel="shortcut icon" href="./welcomePage/assets/img/melancia.png" type="image/x-icon">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <title>Histórico / e-commerce</title>
 </head>
-<body>
-    
+
+<body ng-controller="homeController">
+    <div class="container">
+        <div class="sidebar">
+            <div class="w-full">
+                <div class="menu-item">
+                    <a href="../../index.html">Home</a>
+                </div>
+                <div class="menu-item">
+                    <a href="#" class="active">Histórico</a>
+                </div>
+            </div>
+            <div class="footer-sidebar">
+                <div>
+                    <div class="menu-item" ng-click="logout()">
+                        <a href="../index.html">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main">
+            <div class="content">
+                <div class="card" ng-repeat="data in products">
+                    <div class="card-content">
+                        <div class="card-image">
+                            <img src="{{data.imageUrl}}" alt="{{data.name}}">
+                        </div>
+                        <div class="card-footer">
+                            <div>
+                                <h3>{{data.name}}</h3>
+                                <p class="description">{{data.description}}</p>
+                            </div>
+                            <p class="price">{{ data.price | currency:'R$ ':2 }}</p>
+                            <button type="button" ng-click="addToCart(data.id, data.price)">ADICIONAR</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
+
+<script src="../global/scripts/routeConfigs.js"></script>
+<script src="./assets/scripts/main.js"></script>
+
 </html>

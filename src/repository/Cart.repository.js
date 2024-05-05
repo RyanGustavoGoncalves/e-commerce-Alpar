@@ -83,7 +83,7 @@ export class CartRepository {
                     id: true,
                     total: true,
                     closed: true,
-                   CartItem:
+                    CartItem:
                     {
                         select: {
                             id: true,
@@ -115,7 +115,8 @@ export class CartRepository {
                     id: Number(id)
                 },
                 data: {
-                    closed: true
+                    closed: true,
+                    dateClosed: new Date()
                 }
             });
         } catch (error) {

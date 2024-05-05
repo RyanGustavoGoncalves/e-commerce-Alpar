@@ -37,6 +37,7 @@ export class UserRepository {
                             id: true,
                             total: true,
                             closed: true,
+                            dateCreated: true,
                             CartItem: {
                                 select: {
                                     id: true,

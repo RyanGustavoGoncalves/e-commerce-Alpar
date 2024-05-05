@@ -5,6 +5,23 @@ app.controller('cartController', function ($scope, $http) {
     $scope.cart = [];
     $scope.total = 0;
 
+    $scope.closeCart = () => {
+        $http.put(`http://localhost:3000/api/v1/cart/finish/${localStorage.getItem('cartID')}`, null, {
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("token"),
+            }
+        })
+            .then((response) => {
+                console.log(response);
+                alert('Compra realizada com sucesso!');
+                // window.location.href = '/cart/cartFinish';
+                window.location.href = '/';
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
+
     $scope.getCartById = () => {
         $http.get(`http://localhost:3000/api/v1/cart/${localStorage.getItem('cartID')}`, {
             headers: {
@@ -22,7 +39,6 @@ app.controller('cartController', function ($scope, $http) {
 
     $scope.updateTotalPriceCart = () => {
         $http.put(`http://localhost:3000/api/v1/cart/${localStorage.getItem('cartID')}`, {
-
             total: $scope.getTotalPrice(),
         }, {
             headers: {

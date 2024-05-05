@@ -14,7 +14,7 @@ app.controller('homeController', function ($scope, $http) {
         localStorage.clear();
         window.location.href = "/";
     }
-    
+
     $scope.getAllProducts = () => {
         $http.get("http://localhost:3000/api/v1/product", {
             headers: {
@@ -38,6 +38,8 @@ app.controller('homeController', function ($scope, $http) {
             }
         }).then((response) => {
             console.log(response);
+            localStorage.setItem("cartID", response.data.id);
+            alert("Carrinho criado com sucesso");
         }).catch((error) => {
             console.log(error);
         });
@@ -49,6 +51,7 @@ app.controller('homeController', function ($scope, $http) {
             const userDetail = userDetails[i];
             if (userDetail.cart === undefined || userDetail.cart.length === 0) {
                 console.log("O usuário", userDetail.username, "não tem carrinhos. Criando um novo carrinho...");
+                localStorage.removeItem("cartID");
                 $scope.createCart();
                 return;
             }
@@ -57,11 +60,11 @@ app.controller('homeController', function ($scope, $http) {
             const lastCart = userDetail.cart[lastCartIndex];
 
             const isLastCartClosed = lastCart.closed;
-            console.log("isLastCartClosed", isLastCartClosed);
-            localStorage.setItem("cartID", userDetail.cart[lastCartIndex].id)
             if (isLastCartClosed) {
                 console.log("O último carrinho para o usuário", userDetail.username, "está fechado. Criando um novo carrinho...");
+                localStorage.removeItem("cartID");
                 $scope.createCart();
+                return;
             } else {
                 console.log("O último carrinho para o usuário", userDetail.username, "está aberto. Mantendo o mesmo carrinho...");
                 $http.post("http://localhost:3000/api/v1/cartItem", {
@@ -91,14 +94,17 @@ app.controller('homeController', function ($scope, $http) {
     $scope.getAllProducts();
     $scope.countItems = () => {
         userDetailsPromise.then(() => {
-            userDetails.forEach(user => {
+            const lastUser = userDetails[userDetails.length - 1];
+            if (lastUser && lastUser.cart && lastUser.cart.length > 0) {
+                localStorage.setItem("cartID", lastUser.cart[lastUser.cart.length - 1].id);
+                const lastCart = lastUser.cart[lastUser.cart.length - 1];
+                $scope.cartItems = lastCart.CartItem.length;
+            } else {
                 $scope.cartItems = 0;
-                user.cart.forEach(cart => {
-                    $scope.cartItems += cart.CartItem.length;
-                });
-            });
+            }
         });
     }
+
     $scope.countItems();
     $scope.searchProducts = () => {
         if (!$scope.searchTerm.trim()) {

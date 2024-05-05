@@ -28,19 +28,12 @@
                     <a href="../index.html">Home</a>
                 </div>
             </div>
-            <div class="footer-sidebar">
-                <div>
-                    <div class="menu-item" ng-click="logout()">
-                        <a href="../index.html">Logout</a>
-                    </div>
-                </div>
-            </div>
         </aside>
         <main class="main-content">
             <div class="cart-container">
                 <h2>Carrinho de Compras</h2>
                 <div class="product-card">
-                    <div ng-if="cart.length === 0" style="text-align: center;">
+                    <div ng-if="cart.CartItem.length === 0" style="text-align: center;">
                         <h3>Adicione items ao seu carrinho!</h3>
                         <button class="btn btn-link"><a href="../index.html">Voltar para a home!</a></button>
                     </div>
@@ -67,7 +60,10 @@
                         <span>Total: {{ total | currency:'R$ ':2 }}</span>
                     </div>
                     <div class="btn-finalizar">
-                        <button class="btn btn-primary" ng-click="checkout()">Finalizar Compra</button>
+                        <button ng-if="cart.CartItem.length > 0" class="btn btn-primary"
+                            ng-click="closeCart()">Finalizar Compra</button>
+                        <button ng-if="cart.CartItem.length === 0" class="btn btn-primary" disabled>Finalizar
+                            Compra</button>
                     </div>
                 </div>
         </main>

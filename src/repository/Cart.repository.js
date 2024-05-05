@@ -107,4 +107,20 @@ export class CartRepository {
             throw error;
         }
     }
+
+    finishCart = async (id) => {
+        try {
+            return await this.prisma.cart.update({
+                where: {
+                    id: Number(id)
+                },
+                data: {
+                    closed: true
+                }
+            });
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
 }

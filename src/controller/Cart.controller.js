@@ -27,4 +27,25 @@ export class CartController {
         }
     }
 
+    updateTotalPriceCart = async (req, res) => {
+        try {
+            const cartID = req.params.id;
+            const total = req.body.total;
+            const cart = await this.repository.updateTotalPriceCart(cartID, total);
+            res.status(200).json(cart);
+        } catch (error) {
+            res.status(400).json({ message: error.message });
+        }
+    }
+    
+    getCartById = async (req, res) => {
+        try {
+            const cartID = req.params.id;
+            const cart = await this.repository.getCartById(cartID);
+            res.status(200).json(cart);
+        } catch (error) {
+            res.status(400).json({ message: error.message });
+        }
+    }
+
 }

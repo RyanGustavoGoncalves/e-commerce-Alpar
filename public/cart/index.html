@@ -44,7 +44,7 @@
                         <h3>Adicione items ao seu carrinho!</h3>
                         <button class="btn btn-link"><a href="../index.html">Voltar para a home!</a></button>
                     </div>
-                    <div class="d-flex align-items-center" ng-repeat="cartItem in cart">
+                    <div class="d-flex align-items-center" ng-repeat="cartItem in cart.CartItem">
                         <img src="{{ cartItem.product.imageUrl }}" alt="{{ cartItem.product.name }}"
                             class="product-image">
                         <div class="product-details">
@@ -62,7 +62,14 @@
                         </div>
                     </div>
                 </div>
-            </div>
+                <div class="total">
+                    <div class="total-price">
+                        <span>Total: {{ total | currency:'R$ ':2 }}</span>
+                    </div>
+                    <div class="btn-finalizar">
+                        <button class="btn btn-primary" ng-click="checkout()">Finalizar Compra</button>
+                    </div>
+                </div>
         </main>
     </div>
     <script src="../global/scripts/routeConfigs.js"></script>

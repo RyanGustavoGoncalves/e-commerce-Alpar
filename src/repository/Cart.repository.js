@@ -56,4 +56,55 @@ export class CartRepository {
             throw error;
         }
     }
+
+    updateTotalPriceCart = async (id, total) => {
+        try {
+            return await this.prisma.cart.update({
+                where: {
+                    id: Number(id)
+                },
+                data: {
+                    total: parseFloat(total.toFixed(2)),
+                }
+            });
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+
+    getCartById = async (id) => {
+        try {
+            return await this.prisma.cart.findUnique({
+                where: {
+                    id: Number(id)
+                },
+                select: {
+                    id: true,
+                    total: true,
+                    closed: true,
+                   CartItem:
+                    {
+                        select: {
+                            id: true,
+                            quantity: true,
+                            price: true,
+                            product: {
+                                select: {
+                                    id: true,
+                                    name: true,
+                                    description: true,
+                                    price: true,
+                                    imageUrl: true
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
 }

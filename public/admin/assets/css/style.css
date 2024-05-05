@@ -119,6 +119,13 @@ body {
     background-color: rgb(255, 196, 35, 0.8);
 }
 
+.align-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: .8rem;
+}
+
 .card-content {
     height: 100%;
     display: grid;
@@ -273,19 +280,18 @@ body {
     line-height: 20px;
 }
 
-.filter {
+.filter{
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1rem;
 }
 
-.filter input {
+.filter input{
     padding: .6rem;
     border-radius: 5px;
     border: 1px solid #ccc;
 }
-
 
 @media screen and (max-width: 790px) {
     .card {

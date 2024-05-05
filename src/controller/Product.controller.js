@@ -35,4 +35,16 @@ export class ProductController {
             res.status(500).json({ message: 'Erro ao deletar o produto' });
         }
     }
+
+    updateProduct = async (req, res) => {
+        try {
+            const { id } = req.params;
+            const product = req.body;
+            await this.repository.updateProduct(id, product);
+            res.status(204).end();
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: 'Erro ao atualizar o produto' });
+        }
+    }
 }

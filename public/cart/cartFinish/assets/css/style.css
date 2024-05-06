@@ -103,7 +103,7 @@ body {
     grid-gap: 20px;
 }
 
-.card-Total{
+.card-Total {
     display: flex;
     justify-content: flex-end;
     padding: .5rem;
@@ -128,13 +128,13 @@ body {
     margin: 0;
 }
 
-.alert-historico{
+.alert-historico {
     text-align: center;
     background-color: #f8f9fa;
     border-radius: 10px;
 }
 
-.alert-historico h2{
+.alert-historico h2 {
     font-weight: normal;
 }
 
@@ -143,5 +143,45 @@ body {
     .card {
         max-width: 100%;
     }
+}
 
+@media screen and (max-width: 600px) {
+
+    .main {
+        padding: 10px;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    .sidebar {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        gap: .2rem;
+        overflow-x: auto;
+        padding: .1rem;
+        min-height: 3rem;
+    }
+
+    .menu-item {
+        width: 5rem;
+    }
+
+    .w-full {
+        display: contents;
+    }
+
+    .footer-sidebar {
+        display: block;
+    }
+
+    .item-quantidade {
+        right: -10px;
+        width: 15px;
+        height: 15px;
+        line-height: 16px;
+    }
 }

@@ -35,6 +35,16 @@
             </div>
         </div>
         <div class="mb-3">
+            <label for="confirmEmail" class="form-label">Confirm Email</label>
+            <input type="email" class="form-control" id="confirmEmail" name="confirmEmail" ng-model="confirmEmail"
+                ng-required="true" autocomplete="email">
+            <div class="error-message" ng-show="form.confirmEmail.$touched && form.confirmEmail.$invalid">
+                <span ng-show="form.confirmEmail.$error.required">Confirmation email is required.</span>
+                <span ng-show="form.confirmEmail.$error.email">Invalid email format.</span>
+                <span ng-show="confirmEmail !== email">Emails do not match.</span>
+            </div>
+        </div>
+        <div class="mb-3">
             <label for="password" class="form-label">Password</label>
             <input type="password" class="form-control" id="password" name="password" ng-model="password"
                 ng-required="true" autocomplete="current-password" ng-minlength="8"
@@ -43,6 +53,15 @@
                 <span ng-show="form.password.$error.required">Password is required.</span>
                 <span ng-show="form.password.$error.minlength">Password must be at least 8 characters
                     long.</span>
+            </div>
+            <div class="mb-3">
+                <label for="confirmPassword" class="form-label">Confirm Password</label>
+                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"
+                    ng-model="confirmPassword" ng-required="true" autocomplete="current-password">
+                <div class="error-message" ng-show="form.confirmPassword.$touched && form.confirmPassword.$invalid">
+                    <span ng-show="form.confirmPassword.$error.required">Confirmation password is required.</span>
+                    <span ng-show="confirmPassword !== password">Passwords do not match.</span>
+                </div>
             </div>
         </div>
         <button type="submit" class="btn btn-primary" ng-click="submit()" ng-disabled="form.$invalid">Register</button>

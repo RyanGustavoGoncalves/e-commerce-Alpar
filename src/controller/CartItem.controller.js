@@ -26,9 +26,9 @@ export class CartItemController {
     updateQuantity = async (req, res) => {
         try {
             const id = req.params.cartItem;
-            const { quantity, price } = req.body;
+            const { quantity } = req.body;
             console.log(id, quantity);
-            const cart = await this.repository.updateQuantity(id, quantity, price);
+            const cart = await this.repository.updateQuantity(id, quantity);
             res.status(200).json(cart);
         } catch (error) {
             res.status(400).json({ message: error.message });

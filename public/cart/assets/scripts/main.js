@@ -65,8 +65,7 @@ app.controller('cartController', function ($scope, $http) {
 
     $scope.updateQuantity = (id, quantity, price) => {
         $http.put(`http://localhost:3000/api/v1/cartItem/${id}`, {
-            quantity,
-            price
+            quantity
         }, {
             headers: {
                 "Authorization": "Bearer " + localStorage.getItem("token"),

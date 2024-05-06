@@ -51,7 +51,7 @@ export class CartItemRepository {
         }
     }
 
-    updateQuantity = async (id, quantity, price) => {
+    updateQuantity = async (id, quantity) => {
         try {
             console.log(id, quantity);
             return await this.prisma.cartItem.update({
@@ -59,7 +59,6 @@ export class CartItemRepository {
                     id: parseInt(id)
                 },
                 data: {
-                    price,
                     quantity
                 }
             });

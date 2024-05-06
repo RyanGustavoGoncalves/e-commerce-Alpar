@@ -1,6 +1,6 @@
 # 🛒 e-commerce-Alpar
 
-Este é um projeto de loja virtual desenvolvido como parte do treinamento oferecido pela **Empresa Alpar** e instruído por <a href="https://github.com/felipe-ds-lima">**Felipe Lima**<a>.
+Este é um projeto de loja virtual desenvolvido como parte do treinamento oferecido pela **Empresa <a href="https://alpar.com.br">**Alpar**<a>** e instruído por <a href="https://github.com/felipe-ds-lima">**Felipe Lima**<a>.
 
 ## ℹ️ Sobre o Projeto
 

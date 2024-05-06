@@ -91,6 +91,7 @@ body {
     max-height: 200px;
     border-radius: 5px;
     object-fit: contain;
+    mix-blend-mode: darken;
 }
 
 .card:hover {

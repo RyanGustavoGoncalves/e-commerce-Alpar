@@ -108,6 +108,42 @@ export class CartRepository {
         }
     }
 
+    getAllCartFinish = (id) => {
+        try {
+            return this.prisma.cart.findMany({
+                where: {
+                    userId: Number(id),
+                    closed: true
+                },
+                select: {
+                    id: true,
+                    total: true,
+                    dateCreated: true,
+                    dateClosed: true,
+                    CartItem: {
+                        select: {
+                            id: true,
+                            quantity: true,
+                            price: true,
+                            product: {
+                                select: {
+                                    id: true,
+                                    name: true,
+                                    description: true,
+                                    price: true,
+                                    imageUrl: true
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+
     finishCart = async (id) => {
         try {
             return await this.prisma.cart.update({

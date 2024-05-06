@@ -40,6 +40,7 @@ app.controller('homeController', function ($scope, $http) {
             console.log(response);
             localStorage.setItem("cartID", response.data.id);
             alert("Carrinho criado com sucesso");
+            window.location.reload();
         }).catch((error) => {
             console.log(error);
         });

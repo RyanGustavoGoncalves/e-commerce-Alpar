@@ -1,19 +1,67 @@
 const app = angular.module('cart', []);
 
 app.controller('cartController', function ($scope, $http) {
+    $scope.cartItem = [];
     $scope.cart = [];
-    $scope.getAllCartItemFromCart = () => {
+    $scope.total = 0;
+
+    $scope.closeCart = () => {
+        $http.put(`http://localhost:3000/api/v1/cart/finish/${localStorage.getItem('cartID')}`, null, {
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("token"),
+            }
+        })
+            .then((response) => {
+                console.log(response);
+                alert('Compra realizada com sucesso!');
+                window.location.href = '/cart/cartFinish';
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
+
+    $scope.getCartById = () => {
         $http.get(`http://localhost:3000/api/v1/cart/${localStorage.getItem('cartID')}`, {
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("token"),
+            }
+        })
+            .then((response) => {
+                console.log(response);
+                $scope.cart = response.data;
+                $scope.updateTotalPriceCart();
+            }).catch((error) => {
+                console.log(error);
+            })
+    }
+
+    $scope.updateTotalPriceCart = () => {
+        $http.put(`http://localhost:3000/api/v1/cart/${localStorage.getItem('cartID')}`, {
+            total: $scope.getTotalPrice(),
+        }, {
             headers: {
                 "Authorization": "Bearer " + localStorage.getItem("token"),
             }
         }).then((response) => {
             console.log(response);
-            $scope.cart = response.data.CartItem;
+            $scope.total = response.data.total;
         }).catch((error) => {
             console.log(error);
-        });
+        })
     }
+
+    $scope.getTotalPrice = () => {
+        let totalPrice = 0;
+        if ($scope.cart && $scope.cart.CartItem) {
+            $scope.cart.CartItem.forEach((cartItem) => {
+                totalPrice += cartItem.price * cartItem.quantity;
+            });
+        }
+        return totalPrice;
+    }
+
+
 
     $scope.updateQuantity = (id, quantity, price) => {
         $http.put(`http://localhost:3000/api/v1/cartItem/${id}`, {
@@ -25,7 +73,7 @@ app.controller('cartController', function ($scope, $http) {
             }
         }).then((response) => {
             console.log(response);
-            $scope.getAllCartItemFromCart();
+            $scope.getCartById();
         }).catch((error) => {
             console.log(error);
         });
@@ -38,7 +86,7 @@ app.controller('cartController', function ($scope, $http) {
             }
         }).then((response) => {
             console.log(response);
-            $scope.getAllCartItemFromCart();
+            $scope.getCartById();
         }).catch((error) => {
             console.log(error);
         });
@@ -60,5 +108,5 @@ app.controller('cartController', function ($scope, $http) {
         $scope.updateQuantity(id, quantity, price);
     }
 
-    $scope.getAllCartItemFromCart();
+    $scope.getCartById();
 });

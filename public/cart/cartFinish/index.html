@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="cartFinish">
+
+<head>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./welcomePage/assets/img/melancia.png" type="image/x-icon">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <title>Histórico / e-commerce</title>
+</head>
+
+<body ng-controller="cartFinishCtrl">
+    <div class="container">
+        <div class="sidebar">
+            <div class="w-full">
+                <div class="menu-item">
+                    <a href="../../index.html">Home</a>
+                </div>
+                <div class="menu-item">
+                    <a href="#" class="active">Histórico</a>
+                </div>
+            </div>
+        </div>
+        <div class="main">
+            <div class="content">
+                <div class="card" ng-repeat="data in cart">
+                    <div class="card-content" ng-repeat="CartItem in data.CartItem">
+                        <div class="card-image">
+                            <img src="{{CartItem.product.imageUrl}}" alt="{{CartItem.product.name}}">
+                        </div>
+                        <div>
+                            <h3>{{CartItem.product.name}}</h3>
+                            <p class="description">{{CartItem.product.description}}</p>
+                        </div>
+                        <p class="price">{{ CartItem.product.price | currency:'R$ ':2 }}</p>
+                    </div>
+                    <div class="card-Total">
+                        <p class="price">Total: {{ data.total | currency:'R$ ':2 }}</p>
+                    </div>
+                </div>
+                <div ng-if="cart.length === 0" class="alert-historico">
+                    <h2>Você não possui histórico de compras ainda!</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="../../global/scripts/routeConfigs.js"></script>
+<script src="./assets/scripts/main.js"></script>
+
+</html>

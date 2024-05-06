@@ -1,0 +1,147 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 250px auto;
+    grid-template-rows: auto;
+    grid-template-areas: "sidebar main";
+    height: 100vh;
+}
+
+.sidebar {
+    grid-area: sidebar;
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: space-between;
+    background-color: #f8f9fa;
+    padding: 15px 15px 0px 20px;
+}
+
+.w-full {
+    width: 100%;
+}
+
+.carrinho {
+    max-width: 25px;
+    padding: 0.3rem;
+    margin-bottom: 1rem;
+    transition: background-color 0.3s;
+}
+
+.carrinho:hover {
+    background-color: #92e3a9;
+    border-radius: 5px;
+}
+
+.footer-sidebar {
+    display: grid;
+    align-items: end;
+
+}
+
+.main {
+    overflow: auto;
+    grid-area: main;
+    background-color: #92e3a9;
+    padding: 20px;
+}
+
+.menu-item {
+    margin-bottom: 10px;
+}
+
+.menu-item a {
+    color: #333333;
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.menu-item a:hover {
+    background-color: #92e3a9;
+}
+
+.active {
+    background-color: #92e3a9;
+}
+
+.content {
+    display: grid;
+    gap: 1rem;
+}
+
+.card {
+    background-color: #f8f9fa;
+    padding: .5rem;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.card-image img {
+    max-width: 100px;
+    max-height: 100px;
+    border-radius: 5px;
+    object-fit: contain;
+    mix-blend-mode: darken;
+}
+
+.card:hover {
+    transform: translateY(-1px);
+}
+
+
+.card-content {
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-gap: 20px;
+}
+
+.card-Total{
+    display: flex;
+    justify-content: flex-end;
+    padding: .5rem;
+}
+
+.card h3 {
+    font-size: 18px;
+    font-weight: normal;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.description {
+    color: rgb(85 85 85 / 1);
+    margin: 0;
+}
+
+.price {
+    font-weight: 900;
+    font-size: 20px;
+    color: #000;
+    margin: 0;
+}
+
+.alert-historico{
+    text-align: center;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+}
+
+.alert-historico h2{
+    font-weight: normal;
+}
+
+
+@media screen and (max-width: 790px) {
+    .card {
+        max-width: 100%;
+    }
+
+}

@@ -27,4 +27,46 @@ export class CartController {
         }
     }
 
+    getCartById = async (req, res) => {
+        try {
+            const cartID = req.params.id;
+            const cart = await this.repository.getCartById(cartID);
+            res.status(200).json(cart);
+        } catch (error) {
+            res.status(400).json({ message: error.message });
+        }
+    }
+
+    getAllCartFinish = async (req, res) => {
+        try {
+            const userId = req.params.id;
+            const cart = await this.repository.getAllCartFinish(userId);
+            res.status(200).json(cart);
+        } catch (error) {
+            res.status(400).json({ message: error.message });
+        }
+    }
+
+    updateTotalPriceCart = async (req, res) => {
+        try {
+            const cartID = req.params.id;
+            const total = req.body.total;
+            const cart = await this.repository.updateTotalPriceCart(cartID, total);
+            res.status(200).json(cart);
+        } catch (error) {
+            res.status(400).json({ message: error.message });
+        }
+    }
+    
+
+    finishCart = async (req, res) => {
+        try {
+            const cartID = req.params.id;
+            const cart = await this.repository.finishCart(cartID);
+            res.status(200).json(cart);
+        } catch (error) {
+            res.status(400).json({ message: error.message });
+        }
+    }
+
 }

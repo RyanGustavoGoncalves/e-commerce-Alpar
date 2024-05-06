@@ -11,6 +11,10 @@ app.controller('homeController', function ($scope, $http) {
     $scope.productIdUpdate = 0;
     $scope.searchTerm = '';
 
+    if ($scope.role === 'user') {
+        window.location.href = "/";
+    }
+
     $scope.openModalProducts = (value, id) => {
         $scope.modalRender = value;
         $scope.productIdUpdate = id;

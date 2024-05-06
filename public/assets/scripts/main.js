@@ -12,7 +12,7 @@ app.controller('homeController', function ($scope, $http) {
 
     $scope.logout = () => {
         localStorage.clear();
-        window.location.href = "/";
+        window.location.href = "/"; 
     }
 
     $scope.getAllProducts = () => {

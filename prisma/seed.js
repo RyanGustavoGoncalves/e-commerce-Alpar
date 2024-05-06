@@ -17,7 +17,7 @@ async function main() {
           username: 'example_user',
           email: 'user@example.com',
           password: 'password123',
-          role: 'admin',
+          role: 'user',
           cart: {
             create: {
               total: 0,
@@ -31,7 +31,7 @@ async function main() {
                       name: 'Product 1',
                       description: 'Description for Product 1',
                       price: 10.25,
-                      imageUrl: 'https://example.com/product1.jpg',
+                      imageUrl: 'https://imgcentauro-a.akamaihd.net/1366x1366/97360651.jpg',
                     }
                   }
                 }

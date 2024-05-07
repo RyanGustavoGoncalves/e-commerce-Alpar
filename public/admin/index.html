@@ -35,7 +35,8 @@
         <div class="main">
             <div class="filter">
                 <h1>Admin</h1>
-                <input type="search" placeholder="Busque pelo produto..." ng-model="searchTerm" ng-change="searchProducts()">
+                <input type="search" placeholder="Busque pelo produto..." ng-model="searchTerm"
+                    ng-change="searchProducts()">
             </div>
             <div class="modal" ng-if="modal">
                 <div class="modal-dialog">
@@ -67,7 +68,11 @@
                                     <span class="error-message" ng-show="productForm.price.$error.required">Price is
                                         required.</span>
                                 </div>
-                                <div>
+                                <div class="image-input">
+                                    <img src="https://www.pngkey.com/png/detail/233-2332677_image-500580-placeholder-transparent.png"
+                                    ng-src="{{imgUrl || 'https://www.pngkey.com/png/detail/233-2332677_image-500580-placeholder-transparent.png'}}" 
+                                    alt=""
+                                     >
                                     <label for="imgUrl">Image URL:</label>
                                     <input type="url" id="imgUrl" name="imgUrl" ng-model="imgUrl" required>
                                     <span class="error-message" ng-show="productForm.imgUrl.$error.required">Image URL
@@ -118,8 +123,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form name="productForm" ng-submit="removeProduct()"
-                                novalidate class="form-container">
+                            <form name="productForm" ng-submit="removeProduct()" novalidate class="form-container">
                                 <h2>Você realmente deseja remover esse produto?</h2>
                                 <button type="submit" ng-disabled="productForm.$invalid">Submit</button>
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"

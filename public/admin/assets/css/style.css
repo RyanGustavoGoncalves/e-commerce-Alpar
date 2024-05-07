@@ -293,6 +293,17 @@ body {
     border: 1px solid #ccc;
 }
 
+.image-input{
+    display: grid;
+}
+.image-input img{
+    max-width: 300px;
+    margin: 0 auto;
+    border-radius: 5px;
+    object-fit: contain;
+
+}
+
 @media screen and (max-width: 790px) {
     .card {
         max-width: 100%;

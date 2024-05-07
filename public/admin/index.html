@@ -38,7 +38,7 @@
                 <input type="search" placeholder="Busque pelo produto..." ng-model="searchTerm"
                     ng-change="searchProducts()">
             </div>
-            <div class="modal" ng-if="modal">
+            <div class="modal" ng-class="{'overflow': modal}" ng-if="modal">
                 <div class="modal-dialog">
                     <div class="modal-content" ng-if="modalRender === 1">
                         <div class="modal-header">
@@ -50,7 +50,8 @@
                                 class="form-container">
                                 <div>
                                     <label for="name">Name:</label>
-                                    <input type="text" id="name" name="name" ng-model="name" required placeholder="Insira o nome do produto...">
+                                    <input type="text" id="name" name="name" ng-model="name" required
+                                        placeholder="Insira o nome do produto...">
                                     <span class="error-message" ng-show="productForm.name.$error.required">Name is
                                         required.</span>
                                 </div>
@@ -64,17 +65,18 @@
                                 </div>
                                 <div>
                                     <label for="price">Price:</label>
-                                    <input type="number" id="price" name="price" ng-model="price" required placeholder="Insira o preço do produto...">
+                                    <input type="number" id="price" name="price" ng-model="price" required
+                                        placeholder="Insira o preço do produto...">
                                     <span class="error-message" ng-show="productForm.price.$error.required">Price is
                                         required.</span>
                                 </div>
                                 <div class="image-input">
                                     <img src="https://www.pngkey.com/png/detail/233-2332677_image-500580-placeholder-transparent.png"
-                                    ng-src="{{imgUrl || 'https://www.pngkey.com/png/detail/233-2332677_image-500580-placeholder-transparent.png'}}" 
-                                    alt=""
-                                     >
+                                        ng-src="{{imgUrl || 'https://www.pngkey.com/png/detail/233-2332677_image-500580-placeholder-transparent.png'}}"
+                                        alt="">
                                     <label for="imgUrl">Image URL:</label>
-                                    <input type="url" id="imgUrl" name="imgUrl" ng-model="imgUrl" required placeholder="Insira a url da imagem...">
+                                    <input type="url" id="imgUrl" name="imgUrl" ng-model="imgUrl" required
+                                        placeholder="Insira a url da imagem...">
                                     <span class="error-message" ng-show="productForm.imgUrl.$error.required">Image URL
                                         is required.</span>
                                     <span class="error-message" ng-show="productForm.imgUrl.$error.url">Invalid URL
@@ -106,7 +108,10 @@
                                     <label for="price">Price:</label>
                                     <input type="number" id="price" name="price" ng-model="price">
                                 </div>
-                                <div>
+                                <div class="image-input">
+                                    <img src="https://www.pngkey.com/png/detail/233-2332677_image-500580-placeholder-transparent.png"
+                                        ng-src="{{imgUrl || 'https://www.pngkey.com/png/detail/233-2332677_image-500580-placeholder-transparent.png'}}"
+                                        alt="">
                                     <label for="imgUrl">Image URL:</label>
                                     <input type="url" id="imgUrl" name="imgUrl" ng-model="imgUrl">
                                 </div>

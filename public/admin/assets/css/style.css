@@ -306,10 +306,6 @@ body {
 
 }
 
-.overflow {
-    overflow: hidden;
-}
-
 @media screen and (max-width: 790px) {
     .card {
         max-width: 100%;

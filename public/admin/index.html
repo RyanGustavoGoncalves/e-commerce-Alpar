@@ -50,21 +50,21 @@
                                 class="form-container">
                                 <div>
                                     <label for="name">Name:</label>
-                                    <input type="text" id="name" name="name" ng-model="name" required>
+                                    <input type="text" id="name" name="name" ng-model="name" required placeholder="Insira o nome do produto...">
                                     <span class="error-message" ng-show="productForm.name.$error.required">Name is
                                         required.</span>
                                 </div>
-                                <div>
+                                <div class="image-input">
                                     <label for="description">Description:</label>
-                                    <input type="text" id="description" name="description" ng-model="description"
-                                        required>
+                                    <textarea type="text" id="description" name="description" ng-model="description"
+                                        required placeholder="Insira a descrição do produto..."></textarea>
                                     <span class="error-message"
                                         ng-show="productForm.description.$error.required">Description is
                                         required.</span>
                                 </div>
                                 <div>
                                     <label for="price">Price:</label>
-                                    <input type="number" id="price" name="price" ng-model="price" required>
+                                    <input type="number" id="price" name="price" ng-model="price" required placeholder="Insira o preço do produto...">
                                     <span class="error-message" ng-show="productForm.price.$error.required">Price is
                                         required.</span>
                                 </div>
@@ -74,7 +74,7 @@
                                     alt=""
                                      >
                                     <label for="imgUrl">Image URL:</label>
-                                    <input type="url" id="imgUrl" name="imgUrl" ng-model="imgUrl" required>
+                                    <input type="url" id="imgUrl" name="imgUrl" ng-model="imgUrl" required placeholder="Insira a url da imagem...">
                                     <span class="error-message" ng-show="productForm.imgUrl.$error.required">Image URL
                                         is required.</span>
                                     <span class="error-message" ng-show="productForm.imgUrl.$error.url">Invalid URL

@@ -234,7 +234,7 @@ body {
     margin-bottom: 5px;
 }
 
-.form-container input {
+.form-container input,.form-container textarea {
     width: 100%;
     padding: 8px;
     margin-bottom: 10px;

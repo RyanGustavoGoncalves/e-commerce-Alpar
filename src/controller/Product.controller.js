@@ -18,7 +18,6 @@ export class ProductController {
     getProduct = async (req, res) => {
         try {
             const { id } = req.params;
-            console.log(id);
             const product = await this.repository.getProduct(id);
             res.status(200).json(product);
         } catch (error) {

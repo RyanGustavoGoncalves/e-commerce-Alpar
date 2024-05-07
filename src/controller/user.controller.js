@@ -58,6 +58,7 @@ export class UserController {
         try {
             const user = req.body;
             const data = await this.repository.loginUser(user);
+            if (data.error) return res.status(403).json({ error: data.error });
             return res.status(200).json({ token: data.token, user: data.user, message: "User logged in" });
         } catch (error) {
             console.error(error);

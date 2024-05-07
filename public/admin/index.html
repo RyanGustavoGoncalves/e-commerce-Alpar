@@ -21,7 +21,7 @@
             <div class="footer-sidebar">
                 <div>
                     <div class="menu-item" ng-if="role === 'admin'" ng-click="openModalProducts(1)">
-                        <a href="#" ng-class="{'active': modal}">Add items</a>
+                        <a href="#" ng-class="{'active': modal && modalRender === 1}">Add items</a>
                     </div>
                     <div class="menu-item" ng-if="role === 'admin'">
                         <a href="#" class="active">Admin</a>

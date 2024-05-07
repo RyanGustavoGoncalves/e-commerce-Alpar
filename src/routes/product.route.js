@@ -7,5 +7,6 @@ const productController = new ProductController();
 
 productRouter.post('/', adminMiddleware, productController.saveProduct);
 productRouter.get('/', productController.getProducts);
+productRouter.get('/:id', productController.getProduct);
 productRouter.delete('/:id', adminMiddleware, productController.deleteProduct);
 productRouter.put('/:id', adminMiddleware, productController.updateProduct);

@@ -10,6 +10,10 @@ app.controller('homeController', function ($scope, $http) {
     $scope.modalRender = 0;
     $scope.productIdUpdate = 0;
     $scope.searchTerm = '';
+    $scope.name = "";
+    $scope.description = "";
+    $scope.price = "";
+    $scope.imgUrl = "";
 
     if ($scope.role === 'user') {
         window.location.href = "/";
@@ -18,9 +22,17 @@ app.controller('homeController', function ($scope, $http) {
     $scope.openModalProducts = (value, id) => {
         $scope.modalRender = value;
         $scope.productIdUpdate = id;
+        if (value === 2) {
+            $scope.getProduct(id);
+        }
         $scope.modal = true;
     }
+
     $scope.closeModalProducts = () => {
+        $scope.name = "";
+        $scope.description = "";
+        $scope.price = "";
+        $scope.imgUrl = "";
         $scope.modal = false;
     }
 
@@ -82,6 +94,24 @@ app.controller('homeController', function ($scope, $http) {
 
     }
 
+    $scope.getProduct = (id) => {
+        $http.get(`http://localhost:3000/api/v1/product/${id}`, {
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem('token')
+            }
+        })
+            .then((response) => {
+                console.log(response);
+                $scope.name = response.data.name;
+                $scope.description = response.data.description;
+                $scope.price = response.data.price;
+                $scope.imgUrl = response.data.imageUrl;
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }
+
     $scope.getAllProducts = () => {
         $http.get("http://localhost:3000/api/v1/product", {
             headers: {
@@ -94,79 +124,7 @@ app.controller('homeController', function ($scope, $http) {
         });
     }
 
-    $scope.createCart = () => {
-        $http.post("http://localhost:3000/api/v1/cart", {
-            userId: JSON.parse(localStorage.getItem('user')).id,
-            total: 0,
-            closed: false,
-        }, {
-            headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            }
-        }).then((response) => {
-            console.log(response);
-        }).catch((error) => {
-            console.log(error);
-        });
-    }
-
-    $scope.addToCart = (id, price) => {
-        console.log(userDetails);
-        for (let i = 0; i < userDetails.length; i++) {
-            const userDetail = userDetails[i];
-            if (userDetail.cart === undefined || userDetail.cart.length === 0) {
-                console.log("O usuário", userDetail.username, "não tem carrinhos. Criando um novo carrinho...");
-                $scope.createCart();
-                return;
-            }
-
-            const lastCartIndex = userDetail.cart.length - 1;
-            const lastCart = userDetail.cart[lastCartIndex];
-
-            const isLastCartClosed = lastCart.closed;
-            console.log("isLastCartClosed", isLastCartClosed);
-            localStorage.setItem("cartID", userDetail.cart[lastCartIndex].id)
-            if (isLastCartClosed) {
-                console.log("O último carrinho para o usuário", userDetail.username, "está fechado. Criando um novo carrinho...");
-                $scope.createCart();
-            } else {
-                console.log("O último carrinho para o usuário", userDetail.username, "está aberto. Mantendo o mesmo carrinho...");
-                $http.post("http://localhost:3000/api/v1/cartItem", {
-                    productId: id,
-                    cartId: userDetail.cart[lastCartIndex].id,
-                    quantity: 1,
-                    price: price,
-                }, {
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem('token')
-                    }
-                }).then((response) => {
-                    console.log(response);
-                    $scope.countItems();
-                })
-                    .catch((error) => {
-                        if (error.status === 400) {
-                            alert("Item já está no carrinho");
-                        }
-                        console.log(error);
-                    });
-            }
-        }
-    }
-
     $scope.getAllProducts();
-    $scope.countItems = () => {
-        userDetailsPromise.then(() => {
-            userDetails.forEach(user => {
-                $scope.cartItems = 0;
-                user.cart.forEach(cart => {
-                    $scope.cartItems += cart.CartItem.length;
-                });
-            });
-        });
-    }
-    $scope.countItems();
-
     $scope.searchProducts = () => {
         if (!$scope.searchTerm.trim()) {
             $scope.getAllProducts();

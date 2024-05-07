@@ -8,6 +8,13 @@ export class ProductRepository {
     async getProducts() {
         return await this.prisma.product.findMany();
     }
+    async getProduct(id){
+        return await this.prisma.product.findUnique({
+            where: {
+                id: parseInt(id),
+            },
+        });
+    }
 
     async saveProduct({ name, description, price, imageUrl }) {
         console.log(name, description, price, imageUrl);

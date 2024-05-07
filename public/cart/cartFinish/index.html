@@ -27,7 +27,7 @@
                 <div class="card" ng-repeat="data in cart">
                     <div class="card-content" ng-repeat="CartItem in data.CartItem">
                         <div class="card-image">
-                            <img src="{{CartItem.product.imageUrl}}" alt="{{CartItem.product.name}}">
+                            <img ng-src="{{CartItem.product.imageUrl}}" alt="{{CartItem.product.name}}">
                         </div>
                         <div>
                             <h3>{{CartItem.product.name}}</h3>

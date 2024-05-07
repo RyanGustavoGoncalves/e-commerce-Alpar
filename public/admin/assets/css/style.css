@@ -234,7 +234,8 @@ body {
     margin-bottom: 5px;
 }
 
-.form-container input {
+.form-container input,
+.form-container textarea {
     width: 100%;
     padding: 8px;
     margin-bottom: 10px;
@@ -280,17 +281,33 @@ body {
     line-height: 20px;
 }
 
-.filter{
+.filter {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1rem;
 }
 
-.filter input{
+.filter input {
     padding: .6rem;
     border-radius: 5px;
     border: 1px solid #ccc;
+}
+
+.image-input {
+    display: grid;
+}
+
+.image-input img {
+    max-width: 300px;
+    margin: 0 auto;
+    border-radius: 5px;
+    object-fit: contain;
+
+}
+
+.overflow {
+    overflow: hidden;
 }
 
 @media screen and (max-width: 790px) {

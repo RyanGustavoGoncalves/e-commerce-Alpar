@@ -21,7 +21,7 @@
             <div class="footer-sidebar">
                 <div>
                     <div class="menu-item" ng-if="role === 'admin'" ng-click="openModalProducts(1)">
-                        <a href="#" ng-class="{'active': modal}">Add items</a>
+                        <a href="#" ng-class="{'active': modal && modalRender === 1}">Add items</a>
                     </div>
                     <div class="menu-item" ng-if="role === 'admin'">
                         <a href="#" class="active">Admin</a>
@@ -35,9 +35,10 @@
         <div class="main">
             <div class="filter">
                 <h1>Admin</h1>
-                <input type="search" placeholder="Busque pelo produto..." ng-model="searchTerm" ng-change="searchProducts()">
+                <input type="search" placeholder="Busque pelo produto..." ng-model="searchTerm"
+                    ng-change="searchProducts()">
             </div>
-            <div class="modal" ng-if="modal">
+            <div class="modal" ng-class="{'overflow': modal}" ng-if="modal">
                 <div class="modal-dialog">
                     <div class="modal-content" ng-if="modalRender === 1">
                         <div class="modal-header">
@@ -49,27 +50,33 @@
                                 class="form-container">
                                 <div>
                                     <label for="name">Name:</label>
-                                    <input type="text" id="name" name="name" ng-model="name" required>
+                                    <input type="text" id="name" name="name" ng-model="name" required
+                                        placeholder="Insira o nome do produto...">
                                     <span class="error-message" ng-show="productForm.name.$error.required">Name is
                                         required.</span>
                                 </div>
-                                <div>
+                                <div class="image-input">
                                     <label for="description">Description:</label>
-                                    <input type="text" id="description" name="description" ng-model="description"
-                                        required>
+                                    <textarea type="text" id="description" name="description" ng-model="description"
+                                        required placeholder="Insira a descrição do produto..."></textarea>
                                     <span class="error-message"
                                         ng-show="productForm.description.$error.required">Description is
                                         required.</span>
                                 </div>
                                 <div>
                                     <label for="price">Price:</label>
-                                    <input type="number" id="price" name="price" ng-model="price" required>
+                                    <input type="number" id="price" name="price" ng-model="price" required
+                                        placeholder="Insira o preço do produto...">
                                     <span class="error-message" ng-show="productForm.price.$error.required">Price is
                                         required.</span>
                                 </div>
-                                <div>
+                                <div class="image-input">
+                                    <img src="https://www.pngkey.com/png/detail/233-2332677_image-500580-placeholder-transparent.png"
+                                        ng-src="{{imgUrl || 'https://www.pngkey.com/png/detail/233-2332677_image-500580-placeholder-transparent.png'}}"
+                                        alt="">
                                     <label for="imgUrl">Image URL:</label>
-                                    <input type="url" id="imgUrl" name="imgUrl" ng-model="imgUrl" required>
+                                    <input type="url" id="imgUrl" name="imgUrl" ng-model="imgUrl" required
+                                        placeholder="Insira a url da imagem...">
                                     <span class="error-message" ng-show="productForm.imgUrl.$error.required">Image URL
                                         is required.</span>
                                     <span class="error-message" ng-show="productForm.imgUrl.$error.url">Invalid URL
@@ -101,7 +108,10 @@
                                     <label for="price">Price:</label>
                                     <input type="number" id="price" name="price" ng-model="price">
                                 </div>
-                                <div>
+                                <div class="image-input">
+                                    <img src="https://www.pngkey.com/png/detail/233-2332677_image-500580-placeholder-transparent.png"
+                                        ng-src="{{imgUrl || 'https://www.pngkey.com/png/detail/233-2332677_image-500580-placeholder-transparent.png'}}"
+                                        alt="">
                                     <label for="imgUrl">Image URL:</label>
                                     <input type="url" id="imgUrl" name="imgUrl" ng-model="imgUrl">
                                 </div>
@@ -118,8 +128,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form name="productForm" ng-submit="removeProduct()"
-                                novalidate class="form-container">
+                            <form name="productForm" ng-submit="removeProduct()" novalidate class="form-container">
                                 <h2>Você realmente deseja remover esse produto?</h2>
                                 <button type="submit" ng-disabled="productForm.$invalid">Submit</button>
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
@@ -133,7 +142,7 @@
                 <div class="card" ng-repeat="data in products">
                     <div class="card-content">
                         <div class="card-image">
-                            <img src="{{data.imageUrl}}" alt="{{data.name}}">
+                            <img ng-src="{{data.imageUrl}}" alt="{{data.name}}">
                         </div>
                         <div class="card-footer">
                             <div>

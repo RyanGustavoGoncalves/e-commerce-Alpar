@@ -28,10 +28,10 @@ export class CartController {
         }
     }
 
-    getAllCartItemFromCart = async (req, res) => {
+    countItems = async (req, res) => {
         try {
             const cartID = req.params.id;
-            const cart = await this.repository.getAllCartItemFromCart(cartID);
+            const cart = await this.repository.countItems(cartID);
             res.status(200).json(cart);
         } catch (error) {
             res.status(400).json({ message: error.message });

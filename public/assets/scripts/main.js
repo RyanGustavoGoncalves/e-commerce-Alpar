@@ -12,7 +12,7 @@ app.controller('homeController', function ($scope, $http) {
 
     $scope.logout = () => {
         localStorage.clear();
-        window.location.href = "/"; 
+        window.location.href = "/";
     }
 
     $scope.getAllProducts = () => {
@@ -93,16 +93,16 @@ app.controller('homeController', function ($scope, $http) {
     }
 
     $scope.getAllProducts();
+    $scope.getAllProducts();
     $scope.countItems = () => {
-        userDetailsPromise.then(() => {
-            const lastUser = userDetails[userDetails.length - 1];
-            if (lastUser && lastUser.cart && lastUser.cart.length > 0) {
-                localStorage.setItem("cartID", lastUser.cart[lastUser.cart.length - 1].id);
-                const lastCart = lastUser.cart[lastUser.cart.length - 1];
-                $scope.cartItems = lastCart.CartItem.length;
-            } else {
-                $scope.cartItems = 0;
+        $http.get(`http://localhost:3000/api/v1/cart/items/${localStorage.getItem('cartID')}`, {
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("token")
             }
+        }).then((response) => {
+            $scope.cartItems = response.data;
+        }).then((error) => {
+            console.log(error);
         });
     }
 
@@ -117,5 +117,5 @@ app.controller('homeController', function ($scope, $http) {
         }
     };
 
-    
+
 });

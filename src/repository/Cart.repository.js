@@ -24,34 +24,14 @@ export class CartRepository {
         }
     }
 
-    getAllCartItemFromCart = async (id) => {
+    countItems = async (id) => {
         try {
-            return await this.prisma.cart.findUnique({
+            return await this.prisma.cartItem.count({
                 where: {
-                    id: Number(id)
-                },
-                select: {
-                    CartItem:
-                    {
-                        select: {
-                            id: true,
-                            quantity: true,
-                            price: true,
-                            product: {
-                                select: {
-                                    id: true,
-                                    name: true,
-                                    description: true,
-                                    price: true,
-                                    imageUrl: true
-                                }
-                            }
-                        }
-                    }
-
+                    cartId: Number(id)
                 }
             });
-        } catch (error) {
+        }catch (error) {
             console.error(error);
             throw error;
         }
@@ -137,6 +117,46 @@ export class CartRepository {
                         }
                     }
                 }
+            });
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+
+    getLastCartByUserToken = async (id) => {
+        try {
+            return await this.prisma.user.findFirst({
+                where: {
+                    id: Number(id),
+                },
+                select: {
+                    cart: {
+                        select: {
+                            id: true,
+                            total: true,
+                            closed: true,
+                            CartItem:
+                            {
+                                select: {
+                                    id: true,
+                                    quantity: true,
+                                    price: true,
+                                    product: {
+                                        select: {
+                                            id: true,
+                                            name: true,
+                                            description: true,
+                                            price: true,
+                                            imageUrl: true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
             });
         } catch (error) {
             console.error(error);

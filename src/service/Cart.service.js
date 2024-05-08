@@ -1,5 +1,5 @@
-import jwt from "jsonwebtoken";
 import { CartRepository } from "../repository/Cart.repository.js";
+import { verifyToken } from "./token.service.js";
 
 export class CartService {
     constructor() {
@@ -8,11 +8,12 @@ export class CartService {
 
     getLastCartByUserToken = async (token) => {
         try {
-            const decode = jwt.decode(token);
-            return await this.repository.getLastCartByUserToken(decode.id);
+            const decode = verifyToken(token);
+            const data = await this.repository.getLastCartByUserToken(decode.id);
+            const allCartsClosed = data.cart.every(cart => cart.closed === true);
+            return allCartsClosed;
         } catch (error) {
             throw error;
         }
     }
-
 }

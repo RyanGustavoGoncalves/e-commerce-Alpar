@@ -15,6 +15,5 @@ export class CartItemService {
         const cartItems = await this.repository.getItemsInCart(cartId);
         console.log(cartItems);
         return cartItems.some((item) => item.productId === productId);
-
     }
 }

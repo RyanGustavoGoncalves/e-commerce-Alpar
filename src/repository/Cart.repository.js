@@ -144,6 +144,47 @@ export class CartRepository {
         }
     }
 
+    getLastCartByUserToken = async (id) => {
+        console.log(id);
+        try {
+            return await this.prisma.user.findFirst({
+                where: {
+                    id: Number(id),
+                },
+                select: {
+                    cart: {
+                        select: {
+                            id: true,
+                            total: true,
+                            closed: true,
+                            CartItem:
+                            {
+                                select: {
+                                    id: true,
+                                    quantity: true,
+                                    price: true,
+                                    product: {
+                                        select: {
+                                            id: true,
+                                            name: true,
+                                            description: true,
+                                            price: true,
+                                            imageUrl: true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+            });
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+
     finishCart = async (id) => {
         try {
             return await this.prisma.cart.update({

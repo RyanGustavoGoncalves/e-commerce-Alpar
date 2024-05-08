@@ -1,17 +1,28 @@
 import { CartRepository } from "../repository/Cart.repository.js";
+import { CartService } from "../service/Cart.service.js";
 
 export class CartController {
 
     constructor() {
         this.repository = new CartRepository();
+        this.service = new CartService();
     }
 
     createCart = async (req, res) => {
         try {
+            const authHeader = req.headers.authorization;
             const { userId, total, closed } = req.body;
-            console.log(userId, total, closed);
-            const cart = await this.repository.createCart({ userId, total, closed });
-            res.status(201).json(cart);
+            if (!authHeader || !authHeader.startsWith("Bearer ")) {
+                return res.status(401).json({ error: "Unauthorized" });
+            }
+            const token = authHeader.split(" ")[1];
+            const cartExist = await this.service.getLastCartByUserToken(token);
+            if (cartExist) {
+                const cart = await this.repository.createCart({ userId, total, closed });
+                res.status(201).json(cart);
+            } else {
+                res.status(400).json({ message: "Cart is open" });
+            }
         } catch (error) {
             res.status(400).json({ message: error.message });
         }
@@ -57,7 +68,7 @@ export class CartController {
             res.status(400).json({ message: error.message });
         }
     }
-    
+
 
     finishCart = async (req, res) => {
         try {

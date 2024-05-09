@@ -22,6 +22,7 @@ app.controller('homeController', function ($scope, $http) {
             }
         }).then((response) => {
             $scope.products = response.data;
+            $scope.getLastCartId();
         }).catch((error) => {
             console.log(error);
         });
@@ -92,10 +93,21 @@ app.controller('homeController', function ($scope, $http) {
         }
     }
 
-    $scope.getAllProducts();
-    $scope.getAllProducts();
-    $scope.countItems = () => {
-        $http.get(`http://localhost:3000/api/v1/cart/items/${localStorage.getItem('cartID')}`, {
+    $scope.getLastCartId = () => {
+        $http.get(`http://localhost:3000/api/v1/cart/${JSON.parse(localStorage.getItem('user')).id}/last`, {
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("token")
+            }
+        }).then((response) => {
+            localStorage.setItem("cartID", response.data.id);
+            $scope.countItems(response.data.id);
+        }).then((error) => {
+            console.log(error);
+        })
+    }
+
+    $scope.countItems = (id) => {
+        $http.get(`http://localhost:3000/api/v1/cart/items/${localStorage.getItem('cartID') ? localStorage.getItem('cartID') : id}`, {
             headers: {
                 "Authorization": "Bearer " + localStorage.getItem("token")
             }
@@ -106,7 +118,6 @@ app.controller('homeController', function ($scope, $http) {
         });
     }
 
-    $scope.countItems();
     $scope.searchProducts = () => {
         if (!$scope.searchTerm.trim()) {
             $scope.getAllProducts();
@@ -117,5 +128,6 @@ app.controller('homeController', function ($scope, $http) {
         }
     };
 
-
+    $scope.getLastCartId();
+    $scope.getAllProducts();
 });

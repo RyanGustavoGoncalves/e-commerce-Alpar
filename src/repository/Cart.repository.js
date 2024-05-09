@@ -31,7 +31,7 @@ export class CartRepository {
                     cartId: Number(id)
                 }
             });
-        }catch (error) {
+        } catch (error) {
             console.error(error);
             throw error;
         }
@@ -157,6 +157,25 @@ export class CartRepository {
                     }
                 }
 
+            });
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+
+    getLastCartByUserId = async (id) => {
+        try {
+            return await this.prisma.cart.findFirst({
+                where: {
+                    userId: Number(id),
+                    AND: {
+                        closed: false
+                    }
+                },
+                select: {
+                    id: true,
+                }
             });
         } catch (error) {
             console.error(error);
